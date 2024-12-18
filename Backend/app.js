@@ -3,7 +3,7 @@ const app = express();
 const cors = require("cors");
 require("dotenv").config();
 require("./connection/connection");
-// const user = require("./routes/user");
+const user = require("./Routes/user");
 // const books = require("./routes/books");
 // const favourite = require("./routes/favourite");
 // const cart = require("./routes/cart");
@@ -11,7 +11,7 @@ require("./connection/connection");
 app.use(cors());
 app.use(express.json());
 
-// app.use("/api/v1", user);
+app.use("/user", user);
 // app.use("/api/v1", books);
 // app.use("/api/v1", favourite);
 // app.use("/api/v1", cart);
