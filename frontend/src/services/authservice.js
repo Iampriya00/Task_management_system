@@ -12,3 +12,15 @@ export const handleLogout = () => {
   store.dispatch(logout());
   toast.success("Logged out successfully");
 };
+
+export const userEdit = async (data) => {
+  const response = await axios.post("/updateinformation", data);
+  return response.data.data;
+};
+
+export const userDetails = async (data) => {
+  const response = await axios.get("/userInformation", data);
+  console.log(response);
+
+  store.dispatch(setUser(response.data));
+};

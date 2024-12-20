@@ -11,7 +11,7 @@ const AuthWrapper = ({ children, requiredRole }) => {
   useEffect(() => {
     if (!isLoggedIn || !token) {
       navigate("/"); // Redirect to login page if not logged in or no token
-    } else if (requiredRole && user?.role !== requiredRole) {
+    } else if (requiredRole && !requiredRole.includes(user?.role)) {
       navigate("/"); // Redirect to homepage if the user does not have the required role
     }
   }, [isLoggedIn, token, user, requiredRole, navigate]);

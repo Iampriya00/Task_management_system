@@ -1,5 +1,6 @@
 import store from "../store";
 import _axios from "axios";
+import { handleLogout } from "./authservice";
 
 // Base URL for API
 const baseURL = "http://localhost:3000/user"; // You can set the API URL in environment variables
@@ -9,14 +10,10 @@ const axios = _axios.create({
   baseURL,
 });
 
-// Request interceptor to include token in headers if available
 axios.interceptors.request.use((config) => {
-  // Safe check for the auth state and token
-  const authState = store.getState().auth || {}; // Fallback to empty object if auth is undefined
-  const { token } = authState; // Destructure token from authState (or fallback to undefined)
-
+  const { token } = store.getState().user;
   if (token) {
-    config.headers["Authorization"] = `Bearer ${token}`; // Set Authorization header
+    config.headers["Authorization"] = `Bearer ${token}`;
   }
   return config;
 });
@@ -31,26 +28,15 @@ axios.interceptors.response.use(
 
       // Handle unauthorized error (401)
       if (response.status === 401) {
-        handleLogout(); // Call the logout function
-        window.location.href = "/"; // Redirect to the login page
+        handleLogout();
+        // Call the logout function
       }
-
-      // Optional: Log error details for debugging
-      console.error("API Error:", errorObject);
 
       throw errorObject; // Rethrow the error to be handled by the caller
     }
 
-    // Rethrow the error if no response object
-    console.error("API Error (no response):", error);
     throw error;
   }
 );
-
-// Handle user logout (you can import this or define it here)
-function handleLogout() {
-  store.dispatch({ type: "LOGOUT" }); // Assuming you're using Redux for state management
-  // Clear any other sensitive data, if necessary
-}
 
 export default axios;
