@@ -9,17 +9,22 @@ import App from "./App";
 import store, { persistor } from "./store"; // Ensure store is imported correctly
 import { QueryClientProvider } from "react-query";
 import queryClient from "./utils/react-query";
+import { Toaster } from "sonner";
+import { ThemeProvider } from "./components/ui/theme-provider";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <StrictMode>
-    <Provider store={store}>
-      <PersistGate loading={null} persistor={persistor}>
-        <QueryClientProvider client={queryClient}>
-          <Router>
-            <App />
-          </Router>
-        </QueryClientProvider>
-      </PersistGate>
-    </Provider>
+    <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
+      <Provider store={store}>
+        <PersistGate loading={null} persistor={persistor}>
+          <QueryClientProvider client={queryClient}>
+            <Router>
+              <App />
+              <Toaster richColors position="top-right" />
+            </Router>
+          </QueryClientProvider>
+        </PersistGate>
+      </Provider>{" "}
+    </ThemeProvider>
   </StrictMode>
 );

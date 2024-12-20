@@ -90,6 +90,7 @@ router.post("/login", async (req, res) => {
         id: existEmail._id,
         email: existEmail.email,
         username: existEmail.username,
+        role: existEmail.role,
       },
       token: token,
     });

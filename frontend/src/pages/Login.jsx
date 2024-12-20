@@ -2,6 +2,12 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAppSelector } from "../store/hooks";
 import { loginService } from "../services/authservice";
+import { useMutation } from "react-query";
+import { toast } from "sonner";
+import { Button } from "@/components/ui/button";
+import { ModeToggle } from "@/components/ui/themeToggle";
+import { Input } from "@/components/ui/input";
+import { PasswordField } from "@/components/ui/passwordField";
 
 function Login() {
   const navigate = useNavigate();
@@ -18,7 +24,14 @@ function Login() {
     const { name, value } = e.target;
     setValues((prevValues) => ({ ...prevValues, [name]: value }));
   };
-
+  const { mutateAsync: loginMutation } = useMutation(loginService, {
+    onSuccess: () => {
+      toast.success("Loggged in successfully");
+    },
+    onError: (error) => {
+      toast.error(error.message);
+    },
+  });
   const handleSubmit = async (e) => {
     e.preventDefault();
     const { email, password } = values;
@@ -27,76 +40,70 @@ function Login() {
       alert("Please fill in all the fields");
       return;
     }
-    try {
-      await loginService(values);
-      alert("Login successful!");
-    } catch (error) {
-      console.error("Error during login:", error);
-      alert("An error occurred while logging in. Please try again.");
-    }
+
+    await loginMutation(values);
   };
 
   useEffect(() => {
-    if (isLoggedIn && token) {
-      if (user?.role === "user") {
-        navigate("/user");
-      } else if (user?.role === "admin") {
-        navigate("/admin");
-      }
+    if (isLoggedIn && token && user?.role === "user") {
+      navigate("/user");
+    } else if (isLoggedIn && token && user?.role === "admin") {
+      navigate("/admin");
     }
-  }, [isLoggedIn, user, token, navigate]); // Remove `token` from the dependencies since it's not directly used for conditional checks
-
+  }, [isLoggedIn, user, token, navigate]);
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-100">
+    <div className="min-h-screen flex items-center justify-center bg-background">
       <div className="container mx-auto px-4">
-        <h1 className="text-3xl font-bold text-center mb-6">Log In</h1>
+        <div className="flex justify-between items-center">
+          <h1 className="text-3xl font-bold text-center mb-6">Log In</h1>
+          <ModeToggle />
+        </div>
         <form
           onSubmit={handleSubmit}
-          className="max-w-md mx-auto p-8 bg-white rounded-lg shadow-md"
+          className="max-w-md mx-auto p-8 bg-secondary rounded-lg shadow-md space-y-3"
         >
-          {/* Email Field */}
-          <label
-            className="block text-gray-700 text-sm font-bold mb-2"
-            htmlFor="email"
-          >
-            Email
-          </label>
-          <input
-            type="email"
-            id="email"
-            name="email"
-            placeholder="Enter your email"
-            className="w-full p-3 mb-4 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-            aria-label="Email"
-            onChange={handleChange}
-            value={values.email}
-          />
+          <div>
+            {/* Email Field */}
+            <label
+              className="block text-foreground text-sm font-bold mb-2"
+              htmlFor="email"
+            >
+              Email
+            </label>
+            <Input
+              type="email"
+              id="email"
+              name="email"
+              placeholder="Enter your email"
+              aria-label="Email"
+              onChange={handleChange}
+              value={values.email}
+            />
+          </div>
+          <div>
+            {/* Password Field */}
+            <label
+              className="block text-foreground text-sm font-bold mb-2"
+              htmlFor="password"
+            >
+              Password
+            </label>
+            <PasswordField
+              id="password"
+              name="password"
+              placeholder="Enter your password"
+              aria-label="Password"
+              onChange={handleChange}
+              value={values.password}
+            />
+          </div>
 
-          {/* Password Field */}
-          <label
-            className="block text-gray-700 text-sm font-bold mb-2"
-            htmlFor="password"
-          >
-            Password
-          </label>
-          <input
-            type="password"
-            id="password"
-            name="password"
-            placeholder="Enter your password"
-            className="w-full p-3 mb-6 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-            aria-label="Password"
-            onChange={handleChange}
-            value={values.password}
-          />
-
-          {/* Submit Button */}
-          <button
-            type="submit"
-            className="w-full bg-blue-500 text-white py-2 px-4 rounded-lg hover:bg-blue-600 transition duration-200"
-          >
-            Log In
-          </button>
+          <div>
+            {/* Submit Button */}
+            <Button type="submit" className="w-full">
+              Log In
+            </Button>
+          </div>
         </form>
       </div>
     </div>

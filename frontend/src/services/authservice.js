@@ -1,18 +1,14 @@
 import store from "../store";
 import axios from "./axios"; // Assuming this is your axios instance
 import { setUser, setAccessToken, logout } from "../store/auth/userSlice";
+import { toast } from "sonner";
 
 export const loginService = async (data) => {
-  try {
-    const response = await axios.post("/login", data);
-    console.log(response.data);
-    store.dispatch(setUser(response.data.user));
-    store.dispatch(setAccessToken(response.data.token));
-    return response.data;
-  } catch (error) {
-    console.error("Error during login:", error);
-  }
+  const response = await axios.post("/login", data);
+  store.dispatch(setUser(response.data.user));
+  store.dispatch(setAccessToken(response.data.token));
 };
 export const handleLogout = () => {
   store.dispatch(logout());
+  toast.success("Logged out successfully");
 };
