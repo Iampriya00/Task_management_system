@@ -1,10 +1,16 @@
-import React, { useEffect } from "react";
+import React from "react";
 import SideBar from "@/components/Dashboard/sideBar";
-import { useAppSelector } from "@/store/hooks";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
 function UserDashboard() {
-  const user = useAppSelector((state) => state.user.user);
+  const { data: empData = [], isLoading } = useQuery(
+    "allEmployee",
+    userDetails
+  );
+
+  if (isLoading) {
+    return <p>Loading...</p>;
+  }
 
   return (
     <div className="flex">

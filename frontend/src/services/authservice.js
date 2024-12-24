@@ -20,7 +20,10 @@ export const userEdit = async (data) => {
 
 export const userDetails = async (data) => {
   const response = await axios.get("/userInformation", data);
-  console.log(response);
-
   store.dispatch(setUser(response.data));
+};
+
+export const fetchAllEmp = async (data) => {
+  const response = await axios.get("/allemployees", data);
+  return response.data;
 };

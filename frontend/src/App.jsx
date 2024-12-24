@@ -5,6 +5,7 @@ import UserDashboard from "./pages/userDashboard";
 import AdminDashboard from "./pages/adminDashboard";
 import AuthWrapper from "./utils/authWrapper";
 import UserEdit from "./pages/Useredit";
+import AllEmployee from "./pages/Allemployee";
 
 function App() {
   return (
@@ -33,6 +34,14 @@ function App() {
           element={
             <AuthWrapper requiredRole={["user", "admin"]}>
               <UserEdit />
+            </AuthWrapper>
+          }
+        ></Route>
+        <Route
+          path="/employee"
+          element={
+            <AuthWrapper requiredRole={["admin"]}>
+              <AllEmployee />
             </AuthWrapper>
           }
         ></Route>

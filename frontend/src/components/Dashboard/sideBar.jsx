@@ -78,6 +78,30 @@ function SideBar() {
               </li>
               <li>
                 <Link
+                  to="/employee"
+                  className="block text-white font-semibold hover:text-blue-200"
+                >
+                  Employees
+                </Link>
+              </li>
+              <li>
+                <Link
+                  to="/departments"
+                  className="block text-white font-semibold hover:text-blue-200"
+                >
+                  Departments
+                </Link>
+              </li>
+              <li>
+                <Link
+                  to="/leaves"
+                  className="block text-white font-semibold hover:text-blue-200"
+                >
+                  Leaves
+                </Link>
+              </li>
+              <li>
+                <Link
                   to="/addtask"
                   className="block text-white font-semibold hover:text-blue-200"
                 >
