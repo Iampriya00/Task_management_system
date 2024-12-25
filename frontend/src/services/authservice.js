@@ -23,7 +23,7 @@ export const userDetails = async (data) => {
   store.dispatch(setUser(response.data));
 };
 
-export const fetchAllEmp = async (data) => {
-  const response = await axios.get("/allemployees", data);
+export const fetchAllEmp = async () => {
+  const response = await axios.get("/allemployees");
   return response.data;
 };

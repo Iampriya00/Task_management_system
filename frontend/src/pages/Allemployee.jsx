@@ -5,11 +5,12 @@ import { useQuery } from "react-query";
 
 function AllEmployee() {
   const {
-    data: empData = [],
+    data: empData,
     isLoading,
     isError,
     error,
   } = useQuery("allEmployee", fetchAllEmp);
+  console.log(empData);
 
   if (isLoading) {
     return <p>Loading...</p>;
@@ -29,28 +30,28 @@ function AllEmployee() {
             <table className="min-w-full bg-white border border-gray-200 rounded-lg shadow-md">
               <thead className="bg-gray-200">
                 <tr>
-                  <th className="text-left px-6 py-4 border-b border-gray-300">
+                  <th className="text-left text-slate-800 px-6 py-4 border-b border-gray-300">
                     Employee ID
                   </th>
-                  <th className="text-left px-6 py-4 border-b border-gray-300">
+                  <th className="text-left  text-slate-800 px-6 py-4 border-b border-gray-300">
                     Employee Image
                   </th>
-                  <th className="text-left px-6 py-4 border-b border-gray-300">
+                  <th className="text-left  text-slate-800 px-6 py-4 border-b border-gray-300">
                     Employee Name
                   </th>
-                  <th className="text-left px-6 py-4 border-b border-gray-300">
+                  <th className="text-left px-6  text-slate-800 py-4 border-b border-gray-300">
                     Employee Email
                   </th>
-                  <th className="text-left px-6 py-4 border-b border-gray-300">
+                  <th className="text-left  text-slate-800 px-6 py-4 border-b border-gray-300">
                     Employee Phone
                   </th>
                 </tr>
               </thead>
               <tbody>
-                {empData && empData.length > 0 ? (
-                  empData.map((item, idx) => (
+                {empData.data && empData.data.length > 0 ? (
+                  empData.data.map((item, idx) => (
                     <tr key={idx} className="hover:bg-gray-100">
-                      <td className="px-6 py-4 border-b border-gray-300">
+                      <td className="px-6 text-slate-600 py-4 border-b border-gray-300">
                         {item._id}
                       </td>
                       <td className="px-6 py-4 border-b border-gray-300">
@@ -60,13 +61,13 @@ function AllEmployee() {
                           className="w-10 h-10 rounded-full"
                         />
                       </td>
-                      <td className="px-6 py-4 border-b border-gray-300">
+                      <td className="px-6 py-4 text-slate-600 border-b border-gray-300">
                         {item.username}
                       </td>
-                      <td className="px-6 py-4 border-b border-gray-300">
+                      <td className="px-6 py-4 text-slate-600 border-b border-gray-300">
                         {item.email}
                       </td>
-                      <td className="px-6 py-4 border-b border-gray-300">
+                      <td className="px-6 py-4 text-slate-600 border-b border-gray-300">
                         {item.phone}
                       </td>
                     </tr>
