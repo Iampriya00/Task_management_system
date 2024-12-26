@@ -6,7 +6,10 @@ const authenticatetoken = require("./userAuth");
 
 router.post("/signup", async (req, res) => {
   try {
-    const { username, email, password, phone, profileImg } = req.body;
+    const { username, email, password, phone, profileImg, jobtitle, salary } =
+      req.body;
+
+    // Hash the password
     if (username.length < 3) {
       return res
         .status(400)
@@ -31,17 +34,32 @@ router.post("/signup", async (req, res) => {
     if (!profileImg) {
       return res.status(400).json({ message: "Profile picture is required" });
     }
+    if (!jobtitle) {
+      return res.status(400).json({ message: "Job title is required" });
+    }
+    if (!salary) {
+      return res.status(400).json({ message: "Salary is required" });
+    }
     const hashedPassword = await bcrypt.hash(password, 10);
+
+    // Create a new user object
     const user = new User({
       username,
       email,
       password: hashedPassword,
       phone,
       profileImg,
+      jobtitle,
+      salary,
     });
+
+    // Save the user to the database
     await user.save();
+
+    // Send success response
     return res.status(201).json({ message: "Sign-up successful" });
   } catch (error) {
+    console.error(error);
     return res.status(500).json({ message: "Internal Server Error" });
   }
 });
@@ -137,6 +155,22 @@ router.get("/userInformation", authenticatetoken, async (req, res) => {
   }
 });
 
+router.get("/empInformation/:id", authenticatetoken, async (req, res) => {
+  try {
+    const { id } = req.params;
+
+    const user = await User.findById(id).select("-password");
+
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
+    }
+
+    res.status(200).json(user);
+  } catch (error) {
+    return res.status(500).json({ message: "Internal Server Error" });
+  }
+});
+
 router.post("/updateinformation", authenticatetoken, async (req, res) => {
   try {
     const { id } = req.user;
@@ -144,17 +178,17 @@ router.post("/updateinformation", authenticatetoken, async (req, res) => {
       return res.status(401).json({ message: "Unauthorized: Missing user ID" });
     }
 
-    const { username, phone, profileImg } = req.body;
+    const { username, phone, profileImg, jobtitle, salary } = req.body;
 
-    if (!username && !phone && !profileImg) {
+    if (!username && !phone && !profileImg && !jobtitle && !salary) {
       return res.status(400).json({
-        message: "At least one field (username, phone, profileImg) is required",
+        message: "At least one field is required",
       });
     }
 
     const updateUser = await User.findByIdAndUpdate(
       id,
-      { username, phone, profileImg },
+      { username, phone, profileImg, jobtitle, salary },
       { new: true }
     ).select("-password");
 

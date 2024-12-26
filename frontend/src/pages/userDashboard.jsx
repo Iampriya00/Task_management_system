@@ -1,8 +1,12 @@
 import React from "react";
 import SideBar from "@/components/Dashboard/sideBar";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { useQuery } from "react-query";
+import { userDetails } from "@/services/authservice";
+import { useAppSelector } from "@/store/hooks";
 
 function UserDashboard() {
+  const user = useAppSelector((state) => state.user.user);
   const { data: empData = [], isLoading } = useQuery(
     "allEmployee",
     userDetails
@@ -13,17 +17,19 @@ function UserDashboard() {
   }
 
   return (
-    <div className="flex">
+    <div className="flex min-h-screen bg-gray-100">
       <SideBar />
-      <div className="w-3/4 flex h-screen">
-        <div className="container p-20 ">
-          <h1 className="text-2xl mb-6 text-center font-semibold">
-            Use Your Information
+      <div className="flex-1 p-6 md:p-10">
+        <div className="max-w-4xl mx-auto bg-white shadow-lg rounded-lg p-6">
+          <h1 className="text-3xl font-semibold text-center mb-6 text-gray-800">
+            Your Information
           </h1>
-          <div className="flex justify-center mb-3">
-            <Avatar>
-              <AvatarImage src={user.profileImg} />
-              <AvatarFallback>{user.username[0].toUpperCase()}</AvatarFallback>
+          <div className="flex justify-center mb-4">
+            <Avatar className="w-24 h-24">
+              <AvatarImage src={user.profileImg || "/default-avatar.png"} />
+              <AvatarFallback>
+                {user.username?.[0]?.toUpperCase()}
+              </AvatarFallback>
             </Avatar>
           </div>
           <div className="text-center">

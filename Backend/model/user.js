@@ -21,6 +21,14 @@ const userSchema = new mongoose.Schema(
       type: String,
       default: "",
     },
+    jobtitle: {
+      type: String,
+      default: "",
+    },
+    salary: {
+      type: Number,
+      default: 0,
+    },
     role: {
       type: String,
       default: "user",

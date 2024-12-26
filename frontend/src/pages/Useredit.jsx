@@ -26,6 +26,8 @@ function UserEdit() {
       .string()
       .url({ message: "Invalid image URL" })
       .min(1, { message: "Image URL is required" }),
+    jobtitle: z.string().min(1, { message: "Please enter a valid job title" }),
+    salary: z.string().min(1, { message: "Please enter a YOUR SALARY" }),
   });
   const form = useForm({
     resolver: zodResolver(formSchema),
@@ -34,6 +36,8 @@ function UserEdit() {
       email: user?.email || "",
       phone: user?.phone || "",
       image: user?.profileImg || "",
+      jobtitle: user?.jobtitle || "",
+      salary: user?.salary || "",
     },
   });
 
@@ -121,6 +125,41 @@ function UserEdit() {
                 {...form.register("image")}
               />
             </div>
+            {user.role === "user" && (
+              <>
+                <div className="mb-4">
+                  <label
+                    className="block text-gray-700 text-sm font-bold mb-2"
+                    htmlFor="Image"
+                  >
+                    Job Title:
+                  </label>
+                  <Input
+                    type="text"
+                    id="jobtitle"
+                    className="w-full p-2 border border-gray-300 rounded-md"
+                    {...form.register("jobtitle")}
+                    disabled
+                  />
+                </div>
+                <div className="mb-4">
+                  <label
+                    className="block text-gray-700 text-sm font-bold mb-2"
+                    htmlFor="Image"
+                  >
+                    Salary:
+                  </label>
+                  <Input
+                    type="text"
+                    id="salary"
+                    className="w-full p-2 border border-gray-300 rounded-md"
+                    {...form.register("salary")}
+                    disabled
+                  />
+                </div>
+              </>
+            )}
+
             <Button className="w-full" variant="secondary" loading={isLoading}>
               Submit
             </Button>

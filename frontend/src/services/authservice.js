@@ -18,12 +18,26 @@ export const userEdit = async (data) => {
   return response.data.data;
 };
 
-export const userDetails = async (data) => {
-  const response = await axios.get("/userInformation", data);
+export const userDetails = async () => {
+  const response = await axios.get("/userInformation");
   store.dispatch(setUser(response.data));
 };
 
 export const fetchAllEmp = async () => {
   const response = await axios.get("/allemployees");
   return response.data;
+};
+
+export const addEmp = async (data) => {
+  try {
+    const response = await axios.post("/signup", data);
+    return response.data;
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+export const empDetails = async (id) => {
+  const { data } = await axios.get(`/empInformation/${id}`);
+  return data;
 };
