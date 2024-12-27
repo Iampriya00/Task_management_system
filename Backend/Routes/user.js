@@ -171,6 +171,23 @@ router.get("/empInformation/:id", authenticatetoken, async (req, res) => {
   }
 });
 
+router.delete("/deleteEmp/:id", authenticatetoken, async (req, res) => {
+  try {
+    const { id } = req.params;
+    const user = await User.findByIdAndDelete(id);
+
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
+    }
+    res.status(200).json({ message: "User deleted successfully" });
+  } catch (error) {
+    console.error("Error deleting user:", error);
+
+    // Respond with internal server error
+    return res.status(500).json({ message: "Internal Server Error" });
+  }
+});
+
 router.post("/updateinformation", authenticatetoken, async (req, res) => {
   try {
     const { id } = req.user;

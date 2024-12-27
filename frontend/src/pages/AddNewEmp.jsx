@@ -8,6 +8,7 @@ import { useNavigate } from "react-router-dom";
 import { toast } from "sonner";
 import { z } from "zod";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
+import SideBar from "@/components/Dashboard/sideBar";
 
 function AddNewEmp() {
   const [showPassword, setShowPassword] = useState(false);
@@ -77,7 +78,7 @@ function AddNewEmp() {
               <input
                 type="text"
                 {...register("profileImg")}
-                className="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                className="w-full p-2 border text-slate-600 border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
               />
               {errors.profileImg && (
                 <p className="text-red-500 text-xs mt-1">
@@ -92,7 +93,7 @@ function AddNewEmp() {
               <input
                 type="text"
                 {...register("username")}
-                className="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                className="w-full p-2 border text-slate-600 border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
               />
               {errors.username && (
                 <p className="text-red-500 text-xs mt-1">
@@ -107,7 +108,7 @@ function AddNewEmp() {
               <input
                 type="email"
                 {...register("email")}
-                className="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                className="w-full p-2 border text-slate-700 border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
               />
               {errors.email && (
                 <p className="text-red-500 text-xs mt-1">
@@ -122,7 +123,7 @@ function AddNewEmp() {
               <input
                 type="text"
                 {...register("phone")}
-                className="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                className="w-full p-2 border text-slate-700 border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
               />
               {errors.phone && (
                 <p className="text-red-500 text-xs mt-1">
@@ -137,7 +138,7 @@ function AddNewEmp() {
               <input
                 type="text"
                 {...register("jobtitle")}
-                className="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                className="w-full p-2 border text-slate-700 border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
               />
               {errors.jobtitle && (
                 <p className="text-red-500 text-xs mt-1">
@@ -156,7 +157,7 @@ function AddNewEmp() {
                 onInput={(e) => {
                   e.target.value = e.target.value.replace(/[^0-9]/g, ""); // Remove any non-numeric characters
                 }}
-                className="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                className="w-full p-2 border text-slate-700 border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
               />
               {errors.salary && (
                 <p className="text-red-500 text-xs mt-1">
@@ -172,7 +173,7 @@ function AddNewEmp() {
                 <input
                   type={showPassword ? "text" : "password"}
                   {...register("password")}
-                  className="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                  className="w-full p-2 border text-slate-700 border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
                 />
                 <button
                   type="button"

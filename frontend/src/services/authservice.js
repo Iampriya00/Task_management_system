@@ -41,3 +41,13 @@ export const empDetails = async (id) => {
   const { data } = await axios.get(`/empInformation/${id}`);
   return data;
 };
+
+export const deleteEmp = async (id) => {
+  try {
+    const { data } = await axios.delete(`/deleteEmp/${id}`);
+    return data;
+  } catch (error) {
+    console.error("Error deleting employee:", error);
+    throw error;
+  }
+};
