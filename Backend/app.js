@@ -4,19 +4,17 @@ const cors = require("cors");
 require("dotenv").config();
 require("./connection/connection");
 const user = require("./Routes/user");
+const task = require("./Routes/task");
 // const books = require("./routes/books");
 // const favourite = require("./routes/favourite");
 // const cart = require("./routes/cart");
-
 app.use(cors());
 app.use(express.json());
 
-app.use("/user", user);
-// app.use("/api/v1", books);
-// app.use("/api/v1", favourite);
-// app.use("/api/v1", cart);
+app.use(user);
+app.use(task);
 
-app.get("/", (req, res) => {
+app.get("/", (res) => {
   res.send("Hello baby");
 });
 

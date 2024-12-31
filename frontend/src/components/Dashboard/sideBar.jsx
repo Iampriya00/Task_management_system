@@ -102,7 +102,7 @@ function SideBar() {
               </li>
               <li>
                 <Link
-                  to="/addtask"
+                  to="/addnewtask"
                   className="block text-white font-semibold hover:text-blue-200"
                 >
                   Add New Task

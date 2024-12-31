@@ -8,6 +8,7 @@ import UserEdit from "./pages/Useredit";
 import AllEmployee from "./pages/Allemployee";
 import AddNewEmp from "./pages/AddNewEmp";
 import Viewemp from "./pages/Viewemp";
+import AddNewTask from "./pages/AddNewTask";
 
 function App() {
   return (
@@ -60,6 +61,14 @@ function App() {
           element={
             <AuthWrapper requiredRole={["admin"]}>
               <Viewemp />
+            </AuthWrapper>
+          }
+        ></Route>
+        <Route
+          path="addnewtask"
+          element={
+            <AuthWrapper requiredRole={["admin"]}>
+              <AddNewTask />
             </AuthWrapper>
           }
         ></Route>

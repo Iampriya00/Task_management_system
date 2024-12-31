@@ -51,3 +51,20 @@ export const deleteEmp = async (id) => {
     throw error;
   }
 };
+
+export const addTask = async (data) => {
+  try {
+    const response = await axios.post("/addNewTask", data);
+    console.log(response.data);
+    return response.data;
+  } catch (error) {
+    console.error("Error adding task:", error);
+    throw error;
+  }
+};
+
+export const viewTask = async (id) => {
+  const { data } = await axios.get(`/viewTaskbyUser/${id}`);
+  console.log(data);
+  return data;
+};

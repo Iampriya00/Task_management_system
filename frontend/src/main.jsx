@@ -24,7 +24,7 @@ ReactDOM.createRoot(document.getElementById("root")).render(
             </Router>
           </QueryClientProvider>
         </PersistGate>
-      </Provider>{" "}
+      </Provider>
     </ThemeProvider>
   </StrictMode>
 );

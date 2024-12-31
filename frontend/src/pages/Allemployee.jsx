@@ -79,7 +79,7 @@ function AllEmployee() {
                       className={`cursor-pointer ${
                         idx % 2 === 0 ? "bg-gray-50" : "bg-white"
                       } hover:bg-gray-100`}
-                      onClick={() => navigate(`/viewemployee/${item._id}`)}
+                      onClick={() => navigate(`/viewemplyoee/${item._id}`)}
                     >
                       <td className="px-6 text-gray-600 py-4 border-b border-gray-300">
                         {item._id}
@@ -109,8 +109,7 @@ function AllEmployee() {
                       <td className="px-6 py-4 border-b border-gray-300">
                         <Button
                           className="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-md"
-                          onClick={(e) => {
-                            e.stopPropagation();
+                          onClick={() => {
                             deleteEmp(item._id).then(() => {
                               window.location.reload();
                             });

@@ -4,8 +4,10 @@
     {
       "type": "node",
       "request": "launch",
-      "name": "Launch Program",
-      "program": "${workspaceFolder}/Backend/app.js"
+      "name": "Launch API",
+      "skipFiles": ["<node_internals>/**"],
+      "envFile": "${workspaceFolder}\\BackEnd\\.env",
+      "program": "${workspaceFolder}\\BackEnd\\app.js"
     }
   ]
 }

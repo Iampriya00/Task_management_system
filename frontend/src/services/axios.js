@@ -3,7 +3,7 @@ import _axios from "axios";
 import { handleLogout } from "./authservice";
 
 // Base URL for API
-const baseURL = "http://localhost:3000/user"; // You can set the API URL in environment variables
+const baseURL = "http://localhost:3000/"; // You can set the API URL in environment variables
 
 // Create an axios instance
 const axios = _axios.create({
