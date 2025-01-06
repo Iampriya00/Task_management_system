@@ -2,8 +2,8 @@ import SideBar from "@/components/Dashboard/sideBar";
 import { updateStatus, viewTask } from "@/services/authservice";
 import { useAppSelector } from "@/store/hooks";
 import queryClient from "@/utils/react-query";
-import React, { useState } from "react";
-import { useMutation, useQuery } from "react-query";
+import React from "react";
+import { useQuery } from "react-query";
 import { toast } from "sonner";
 
 function EmpViewTask() {
