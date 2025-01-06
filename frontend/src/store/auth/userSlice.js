@@ -5,6 +5,7 @@ const initialState = {
   isLoggedIn: false,
   token: null,
   user: {
+    id: "",
     username: "",
     phone: "",
     profileImg: "",

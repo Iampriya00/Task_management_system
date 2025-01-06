@@ -29,6 +29,12 @@ const taskSchema = new Schema({
     ref: User,
     required: true,
   },
+  status: {
+    type: String,
+    enum: ["done", "pending", "working"],
+    required: true,
+    default: "Pending",
+  },
 });
 
 module.exports = mongoose.model("Task", taskSchema);

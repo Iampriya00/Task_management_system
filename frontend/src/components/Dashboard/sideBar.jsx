@@ -48,7 +48,7 @@ function SideBar() {
               </li>
               <li>
                 <Link
-                  to="/viewtask"
+                  to="/empviewtask"
                   className="block text-white font-semibold hover:text-blue-200"
                 >
                   View Task

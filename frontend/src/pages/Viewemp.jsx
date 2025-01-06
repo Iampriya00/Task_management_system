@@ -75,6 +75,7 @@ function Viewemp() {
                     <th className="px-4 py-2 border-b text-left">Due Date</th>
                     <th className="px-4 py-2 border-b text-left">Assign To</th>
                     <th className="px-4 py-2 border-b text-left">Assign By</th>
+                    <th className="px-4 py-2 border-b text-left">Status</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -91,6 +92,7 @@ function Viewemp() {
                         <td className="px-4 py-2 border-b">{task?.datedue}</td>
                         <td className="px-4 py-2 border-b">{task?.assignto}</td>
                         <td className="px-4 py-2 border-b">{task?.assignby}</td>
+                        <td className="px-4 py-2 border-b">{task?.status}</td>
                       </tr>
                     ))
                   ) : (

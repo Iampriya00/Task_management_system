@@ -9,6 +9,7 @@ import AllEmployee from "./pages/Allemployee";
 import AddNewEmp from "./pages/AddNewEmp";
 import Viewemp from "./pages/Viewemp";
 import AddNewTask from "./pages/AddNewTask";
+import EmpViewTask from "./pages/EmpViewTask";
 
 function App() {
   return (
@@ -39,7 +40,7 @@ function App() {
               <UserEdit />
             </AuthWrapper>
           }
-        ></Route>
+        />
         <Route
           path="/employee"
           element={
@@ -47,7 +48,7 @@ function App() {
               <AllEmployee />
             </AuthWrapper>
           }
-        ></Route>
+        />
         <Route
           path="/addemployee"
           element={
@@ -55,7 +56,7 @@ function App() {
               <AddNewEmp />
             </AuthWrapper>
           }
-        ></Route>
+        />
         <Route
           path="/viewemplyoee/:id"
           element={
@@ -63,15 +64,23 @@ function App() {
               <Viewemp />
             </AuthWrapper>
           }
-        ></Route>
+        />
         <Route
-          path="addnewtask"
+          path="/addnewtask"
           element={
             <AuthWrapper requiredRole={["admin"]}>
               <AddNewTask />
             </AuthWrapper>
           }
-        ></Route>
+        />
+        <Route
+          path="/empviewtask"
+          element={
+            <AuthWrapper requiredRole={["user"]}>
+              <EmpViewTask />
+            </AuthWrapper>
+          }
+        />
       </Routes>
     </div>
   );

@@ -11,10 +11,7 @@ router.post("/addNewTask", async (req, res) => {
       return res.status(400).json({ message: "All fields are required" });
     }
 
-    // Parse the string date to Date object if needed
-    const parsedDuedate = new Date(datedue); // Ensure it's a valid Date object
-
-    // Check for invalid date format
+    const parsedDuedate = new Date(datedue);
     if (isNaN(parsedDuedate)) {
       return res.status(400).json({ message: "Invalid due date format" });
     }
@@ -37,20 +34,21 @@ router.post("/addNewTask", async (req, res) => {
     const newTask = new Task({
       taskdetails,
       project,
-      datedue: parsedDuedate, // Ensure you're saving it as a Date
+      datedue: parsedDuedate,
       assignto,
       assignby,
     });
 
-    console.log("New task to save:", newTask);
-
     await newTask.save();
 
-    return res
-      .status(201)
-      .json({ message: "Task added successfully", task: newTask });
+    return res.status(201).json({
+      message: "Task added successfully",
+      task: newTask,
+    });
   } catch (error) {
-    return res.status(500).json({ message: "Internal Server Error" });
+    return res
+      .status(500)
+      .json({ message: "Internal Server Error", error: error.message });
   }
 });
 
@@ -59,12 +57,10 @@ router.get("/viewTaskbyUser/:id", authenticatetoken, async (req, res) => {
     const { id } = req.params;
 
     const user = await User.findById(id).select("-password");
-
     if (!user) {
       return res.status(404).json({ message: "User not found" });
     }
-    const tasks = await Task.find({ assignto: user.email });
-
+    const tasks = await Task.find({ assignto: user.email }).populate("status");
     if (tasks.length === 0) {
       return res.status(404).json({ message: "No tasks found for this user" });
     }
@@ -76,4 +72,40 @@ router.get("/viewTaskbyUser/:id", authenticatetoken, async (req, res) => {
       .json({ message: "Internal Server Error", error: error.message });
   }
 });
+
+router.post("/updateStatus/:id", async (req, res) => {
+  try {
+    const { status } = req.body;
+    const { id } = req.params;
+
+    if (!status) {
+      return res.status(400).json({ message: "Status is required" });
+    }
+
+    const validStatuses = ["done", "pending", "working"];
+    if (!validStatuses.includes(status.toLowerCase())) {
+      return res.status(400).json({
+        message: "Invalid status. Use 'done', 'pending', or 'working'.",
+      });
+    }
+
+    const task = await Task.findById(id);
+    if (!task) {
+      return res.status(404).json({ message: "Task not found" });
+    }
+
+    task.status = status.toLowerCase();
+
+    await task.save();
+
+    return res.status(200).json({
+      message: "Task status updated successfully",
+      task: task,
+    });
+  } catch (error) {
+    console.error("Error updating status:", error);
+    return res.status(500).json({ message: "Internal server error" });
+  }
+});
+
 module.exports = router;

@@ -64,7 +64,21 @@ export const addTask = async (data) => {
 };
 
 export const viewTask = async (id) => {
-  const { data } = await axios.get(`/viewTaskbyUser/${id}`);
-  console.log(data);
-  return data;
+  try {
+    const { data } = await axios.get(`/viewTaskbyUser/${id}`);
+    return data;
+  } catch (error) {
+    throw error;
+  }
+};
+
+export const updateStatus = async (id, dal) => {
+  try {
+    const { data } = await axios.post(`updateStatus/${id}`, dal);
+    console.log(data);
+    return data;
+  } catch (error) {
+    console.error(error);
+    throw error;
+  }
 };
