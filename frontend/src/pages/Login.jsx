@@ -46,7 +46,7 @@ function Login() {
 
   useEffect(() => {
     if (isLoggedIn && token && user?.role === "user") {
-      navigate("/user");
+      navigate("/userDasboard");
     } else if (isLoggedIn && token && user?.role === "admin") {
       navigate("/admin");
     }

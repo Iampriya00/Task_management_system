@@ -41,7 +41,7 @@ function AddNewTask() {
   const { mutateAsync: addTaskMutat } = useMutation(addTask, {
     onSuccess: () => {
       toast.success("Task Added Successfully");
-      navigate("/user");
+      navigate("/userDasboard");
     },
   });
 

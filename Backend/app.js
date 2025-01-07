@@ -5,14 +5,14 @@ require("dotenv").config();
 require("./connection/connection");
 const user = require("./Routes/user");
 const task = require("./Routes/task");
-// const books = require("./routes/books");
-// const favourite = require("./routes/favourite");
-// const cart = require("./routes/cart");
+const clock = require("./Routes/clock");
+
 app.use(cors());
 app.use(express.json());
 
 app.use(user);
 app.use(task);
+app.use(clock);
 
 app.get("/", (res) => {
   res.send("Hello baby");

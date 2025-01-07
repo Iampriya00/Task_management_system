@@ -18,7 +18,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Login />} />
         <Route
-          path="/user"
+          path="/userDasboard"
           element={
             <AuthWrapper requiredRole={["user"]}>
               <UserDashboard />

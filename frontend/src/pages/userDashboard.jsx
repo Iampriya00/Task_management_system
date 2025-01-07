@@ -1,9 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 import SideBar from "@/components/Dashboard/sideBar";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { useQuery } from "react-query";
-import { userDetails } from "@/services/authservice";
+import { clockIn, clockOut, userDetails } from "@/services/authservice";
 import { useAppSelector } from "@/store/hooks";
+import { Button } from "@/components/ui/button";
+import { toast } from "sonner";
 
 function UserDashboard() {
   const user = useAppSelector((state) => state.user.user);
@@ -15,6 +17,13 @@ function UserDashboard() {
   if (isLoading) {
     return <p>Loading...</p>;
   }
+
+  const handleClockIn = async () => {
+    return await clockIn();
+  };
+  const handleClockOut = async () => {
+    return await clockOut();
+  };
 
   return (
     <div className="flex min-h-screen bg-gray-100">
@@ -46,6 +55,32 @@ function UserDashboard() {
               Phone: <span className="text-gray-500">{user.phone}</span>
             </p>
           </div>
+        </div>
+
+        {/* Buttons for Clock In and Clock Out */}
+        <div className="flex justify-center mt-4">
+          <Button className="me-3" onClick={handleClockIn}>
+            Clock In
+          </Button>
+          <Button onClick={handleClockOut}>Clock Out</Button>
+        </div>
+
+        {/* Table for Clock In/Out records */}
+        <div className="mt-4">
+          <table className="min-w-full border-collapse">
+            <thead className="text-sky-800">
+              <tr>
+                <th className="border px-4 py-2">Clock In</th>
+                <th className="border px-4 py-2">Clock Out</th>
+              </tr>
+            </thead>
+            <tbody className="text-sky-500">
+              <tr>
+                <td className="border px-4 py-2"></td>
+                <td className="border px-4 py-2"></td>
+              </tr>
+            </tbody>
+          </table>
         </div>
       </div>
     </div>

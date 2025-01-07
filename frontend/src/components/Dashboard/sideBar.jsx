@@ -40,7 +40,7 @@ function SideBar() {
             <>
               <li>
                 <Link
-                  to="/user"
+                  to="/userDasboard"
                   className="block text-white font-semibold hover:text-blue-200"
                 >
                   Dashboard
