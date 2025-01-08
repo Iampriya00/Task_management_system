@@ -86,7 +86,6 @@ export const updateStatus = async (id, dal) => {
 export const clockIn = async () => {
   try {
     const { data } = await axios.post("/clock-in");
-    console.log("Clock-in success:", data);
     toast.success(data.message);
     return data;
   } catch (error) {
@@ -98,12 +97,18 @@ export const clockIn = async () => {
 export const clockOut = async () => {
   try {
     const { data } = await axios.post("/clock-out");
-    console.log("Clock-out success:", data);
     toast.success(data.message);
+    return data;
+  } catch (error) {
+    toast.error(error.message);
+  }
+};
 
+export const attendance = async () => {
+  try {
+    const { data } = await axios.get("/empAttendance");
     return data;
   } catch (error) {
     console.log(error);
-    toast.error(error.message);
   }
 };

@@ -1,5 +1,4 @@
 const router = require("express").Router();
-const authenticateToken = require("./userAuth");
 const clock = require("../model/clock");
 const authenticatetoken = require("./userAuth");
 
@@ -55,17 +54,19 @@ router.post("/clock-out", authenticatetoken, async (req, res) => {
   }
 });
 
-router.get("/empAttendance/:id", authenticatetoken, async (req, res) => {
+router.get("/empAttendance", authenticatetoken, async (req, res) => {
   try {
-    const { id } = req.params;
+    const { id } = req.user.id;
 
-    const attendance = await clock.find({ employeeId: id });
+    const attendance = await clock
+      .find({ employeeId: id })
+      .sort({ clockIn: -1 });
 
     if (!attendance || attendance.length === 0) {
       return res.status(404).json({ message: "Attendance records not found" });
     }
 
-    return res.status(200).json({ attendance });
+    return res.status(200).json(attendance);
   } catch (err) {
     console.error(err);
     return res.status(500).json({ message: "Server error" });

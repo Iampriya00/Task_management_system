@@ -1,28 +1,28 @@
-import React, { useState } from "react";
+import React from "react";
 import SideBar from "@/components/Dashboard/sideBar";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { useQuery } from "react-query";
-import { clockIn, clockOut, userDetails } from "@/services/authservice";
+import { attendance, clockIn, clockOut } from "@/services/authservice";
 import { useAppSelector } from "@/store/hooks";
 import { Button } from "@/components/ui/button";
-import { toast } from "sonner";
+import queryClient from "@/utils/react-query";
 
 function UserDashboard() {
   const user = useAppSelector((state) => state.user.user);
-  const { data: empData = [], isLoading } = useQuery(
-    "allEmployee",
-    userDetails
-  );
 
-  if (isLoading) {
-    return <p>Loading...</p>;
-  }
+  const {
+    data: attendenceData,
+    isLoading: attendenceLoading,
+    isError,
+  } = useQuery("attendance", attendance);
+  queryClient.invalidateQueries(`attendance`);
 
   const handleClockIn = async () => {
-    return await clockIn();
+    await clockIn();
   };
+
   const handleClockOut = async () => {
-    return await clockOut();
+    await clockOut();
   };
 
   return (
@@ -57,30 +57,75 @@ function UserDashboard() {
           </div>
         </div>
 
-        {/* Buttons for Clock In and Clock Out */}
         <div className="flex justify-center mt-4">
           <Button className="me-3" onClick={handleClockIn}>
             Clock In
           </Button>
           <Button onClick={handleClockOut}>Clock Out</Button>
         </div>
+        <div className="mt-4 overflow-auto h-[452px]">
+          {/* Show loading indicator */}
+          {attendenceLoading ? (
+            <div>Loading attendance data...</div>
+          ) : isError ? (
+            <div>Error fetching attendance data</div>
+          ) : (
+            <table className="min-w-full border-collapse">
+              <thead className="text-sky-800">
+                <tr>
+                  <th className="border px-4 py-2">Clock In</th>
+                  <th className="border px-4 py-2">Clock Out</th>
+                </tr>
+              </thead>
+              <tbody className="text-sky-500">
+                {attendenceData && attendenceData.length > 0 ? (
+                  attendenceData.map((item, idx) => {
+                    // Formatting Clock In and Clock Out
+                    const clockInFormatted =
+                      new Date(item.clockIn).toLocaleDateString("en-GB") +
+                      " " +
+                      new Date(item.clockIn).toLocaleTimeString("en-US", {
+                        hour: "2-digit",
+                        minute: "2-digit",
+                        second: "2-digit",
+                        hour12: true,
+                      });
 
-        {/* Table for Clock In/Out records */}
-        <div className="mt-4">
-          <table className="min-w-full border-collapse">
-            <thead className="text-sky-800">
-              <tr>
-                <th className="border px-4 py-2">Clock In</th>
-                <th className="border px-4 py-2">Clock Out</th>
-              </tr>
-            </thead>
-            <tbody className="text-sky-500">
-              <tr>
-                <td className="border px-4 py-2"></td>
-                <td className="border px-4 py-2"></td>
-              </tr>
-            </tbody>
-          </table>
+                    const clockOutFormatted = item.clockOut
+                      ? new Date(item.clockOut).toLocaleDateString("en-GB") +
+                        " " +
+                        new Date(item.clockOut).toLocaleTimeString("en-US", {
+                          hour: "2-digit",
+                          minute: "2-digit",
+                          second: "2-digit",
+                          hour12: true,
+                        })
+                      : "Still clocked in";
+
+                    return (
+                      <tr key={idx}>
+                        <td className="border px-4 py-2 text-center">
+                          {clockInFormatted}
+                        </td>
+                        <td className="border px-4 py-2 text-center">
+                          {clockOutFormatted}
+                        </td>
+                      </tr>
+                    );
+                  })
+                ) : (
+                  <tr>
+                    <td
+                      colSpan="2"
+                      className="border px-4 py-2 text-center text-red-500"
+                    >
+                      No attendance data available
+                    </td>
+                  </tr>
+                )}
+              </tbody>
+            </table>
+          )}
         </div>
       </div>
     </div>
