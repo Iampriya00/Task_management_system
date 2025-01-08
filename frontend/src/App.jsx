@@ -10,6 +10,7 @@ import AddNewEmp from "./pages/AddNewEmp";
 import Viewemp from "./pages/Viewemp";
 import AddNewTask from "./pages/AddNewTask";
 import EmpViewTask from "./pages/EmpViewTask";
+import ViewAttendence from "./pages/ViewAttendence";
 
 function App() {
   return (
@@ -78,6 +79,14 @@ function App() {
           element={
             <AuthWrapper requiredRole={["user"]}>
               <EmpViewTask />
+            </AuthWrapper>
+          }
+        />
+        <Route
+          path="/view-attendence/:id"
+          element={
+            <AuthWrapper requiredRole={["admin"]}>
+              <ViewAttendence />
             </AuthWrapper>
           }
         />

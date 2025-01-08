@@ -60,6 +60,7 @@ function AllEmployee() {
                     "Employee Phone",
                     "Job Title",
                     "Salary",
+                    "Attendance",
                     "Action",
                   ].map((header) => (
                     <th
@@ -108,8 +109,22 @@ function AllEmployee() {
                       </td>
                       <td className="px-6 py-4 border-b border-gray-300">
                         <Button
+                          className="bg-yellow-400"
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            navigate(`/view-attendence/${item._id}`);
+                          }}
+                        >
+                          View Attendance
+                        </Button>
+                      </td>
+
+                      {/* Delete Button */}
+                      <td className="px-6 py-4 border-b border-gray-300">
+                        <Button
                           className="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-md"
-                          onClick={() => {
+                          onClick={(e) => {
+                            e.stopPropagation(); // Prevents the row click from firing
                             deleteEmp(item._id).then(() => {
                               window.location.reload();
                             });

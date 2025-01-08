@@ -70,7 +70,7 @@ function SideBar() {
             <>
               <li>
                 <Link
-                  to="/user"
+                  to="/admin"
                   className="block text-white font-semibold hover:text-blue-200"
                 >
                   Dashboard

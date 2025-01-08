@@ -112,3 +112,12 @@ export const attendance = async () => {
     console.log(error);
   }
 };
+
+export const adminViewAttendence = async (id) => {
+  try {
+    const { data } = await axios.get(`/empAttendace/${id}`);
+    return data;
+  } catch (error) {
+    console.log(error);
+  }
+};

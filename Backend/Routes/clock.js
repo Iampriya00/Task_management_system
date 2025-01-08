@@ -73,4 +73,18 @@ router.get("/empAttendance", authenticatetoken, async (req, res) => {
   }
 });
 
+router.get("/empAttendace/:id", authenticatetoken, async (req, res) => {
+  try {
+    const { id } = req.params;
+    const attendance = await clock.find({ userId: id });
+    if (!attendance || attendance.length === 0) {
+      return res.status(404).json({ message: "Attendance records not found" });
+    }
+    return res.status(200).json(attendance);
+  } catch (error) {
+    console.error(err);
+    res.status(500).json({ message: "An error occurred while clocking out." });
+  }
+});
+
 module.exports = router;

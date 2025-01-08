@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import SideBar from "@/components/Dashboard/sideBar";
 import { useAppSelector } from "@/store/hooks";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
