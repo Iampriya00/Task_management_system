@@ -11,6 +11,8 @@ import Viewemp from "./pages/Viewemp";
 import AddNewTask from "./pages/AddNewTask";
 import EmpViewTask from "./pages/EmpViewTask";
 import ViewAttendence from "./pages/ViewAttendence";
+import LeaveManagement from "./pages/LeaveManagement";
+import Leaves from "./pages/Leaves";
 
 function App() {
   return (
@@ -87,6 +89,22 @@ function App() {
           element={
             <AuthWrapper requiredRole={["admin"]}>
               <ViewAttendence />
+            </AuthWrapper>
+          }
+        />
+        <Route
+          path="/leaveManagement"
+          element={
+            <AuthWrapper requiredRole={["user"]}>
+              <LeaveManagement />
+            </AuthWrapper>
+          }
+        />
+        <Route
+          path="/leaves"
+          element={
+            <AuthWrapper requiredRole={["admin"]}>
+              <Leaves />
             </AuthWrapper>
           }
         />

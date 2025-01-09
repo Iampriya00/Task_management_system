@@ -6,6 +6,7 @@ require("./connection/connection");
 const user = require("./Routes/user");
 const task = require("./Routes/task");
 const clock = require("./Routes/clock");
+const leave = require("./Routes/leave");
 
 app.use(cors());
 app.use(express.json());
@@ -13,6 +14,7 @@ app.use(express.json());
 app.use(user);
 app.use(task);
 app.use(clock);
+app.use(leave);
 
 app.get("/", (res) => {
   res.send("Hello baby");

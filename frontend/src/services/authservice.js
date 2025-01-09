@@ -121,3 +121,13 @@ export const adminViewAttendence = async (id) => {
     console.log(error);
   }
 };
+
+export const applyEmpLeave = async (data) => {
+  try {
+    const response = await axios.post("/applyLeave", data);
+    console.log("Response data:", response.data);
+    return response.data;
+  } catch (error) {
+    console.log(error);
+  }
+};
