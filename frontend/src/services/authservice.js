@@ -131,3 +131,13 @@ export const applyEmpLeave = async (data) => {
     console.log(error);
   }
 };
+
+export const viewAllLeave = async (data) => {
+  try {
+    const response = await axios.get("/viewAllLeaves");
+    console.log("Response data:", response.data);
+    return response.data;
+  } catch (error) {
+    console.log(error);
+  }
+};

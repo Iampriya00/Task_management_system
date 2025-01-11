@@ -1,6 +1,12 @@
 const mongoose = require("mongoose");
+const User = require("./user");
 
 const leaveSchema = new mongoose.Schema({
+  userId: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: User,
+    required: true,
+  },
   leavetype: {
     type: String,
     required: true,

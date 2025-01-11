@@ -1,21 +1,16 @@
 import SideBar from "@/components/Dashboard/sideBar";
-import { fetchAllEmp } from "@/services/authservice";
 import React from "react";
 import { useQuery } from "react-query";
-import { useNavigate } from "react-router-dom"; // Import the navigate hook
-
+import { viewAllLeave } from "@/services/authservice";
 function Leaves() {
   const {
     data: empData,
     isLoading,
     isError,
     error,
-  } = useQuery("allEmployee", fetchAllEmp, {
+  } = useQuery("viewAllLeave", viewAllLeave, {
     refetchOnMount: true,
   });
-
-  const navigate = useNavigate(); // Initialize navigate
-
   if (isLoading) {
     return (
       <div className="flex justify-center items-center h-screen">
@@ -31,7 +26,14 @@ function Leaves() {
       </div>
     );
   }
+  function formatDate(date) {
+    const d = new Date(date);
+    const day = String(d.getDate()).padStart(2, "0"); // Ensures two-digit day
+    const month = String(d.getMonth() + 1).padStart(2, "0"); // Zero-based months, so add 1
+    const year = d.getFullYear();
 
+    return `${day}/${month}/${year}`;
+  }
   return (
     <div className="flex min-h-screen bg-gray-100">
       <SideBar />
@@ -46,17 +48,18 @@ function Leaves() {
             <thead className="bg-gray-100">
               <tr>
                 {[
-                  "Employee ID",
                   "Employee Image",
                   "Employee Name",
-                  "Employee Email",
-                  "Employee Phone",
-                  "Job Title",
+                  "Employee Department",
+                  "Leave Type",
+                  "Start Date",
+                  "End Date",
+                  "Reason",
                   "Action",
                 ].map((header) => (
                   <th
                     key={header}
-                    className="text-left text-gray-700 px-6 py-4 border-b border-gray-300"
+                    className="text-left text-gray-700 px-6 py-4 border-b border-gray-300 text-sm sm:text-base" // Responsive text size
                   >
                     {header}
                   </th>
@@ -64,17 +67,14 @@ function Leaves() {
               </tr>
             </thead>
             <tbody>
-              {empData.data && empData.data.length > 0 ? (
-                empData.data.map((item, idx) => (
+              {empData && empData.length > 0 ? (
+                empData.map((item, idx) => (
                   <tr
                     key={idx}
                     className={`cursor-pointer ${
                       idx % 2 === 0 ? "bg-gray-50" : "bg-white"
-                    } hover:bg-gray-100`}
+                    } hover:bg-gray-100 transition-all duration-300`}
                   >
-                    <td className="px-6 py-4 text-gray-600 border-b border-gray-300">
-                      {item._id}
-                    </td>
                     <td className="px-6 py-4 border-b border-gray-300">
                       <img
                         src={item.profileImg}
@@ -82,20 +82,26 @@ function Leaves() {
                         className="w-10 h-10 rounded-full"
                       />
                     </td>
-                    <td className="px-6 py-4 text-gray-600 border-b border-gray-300">
+                    <td className="px-6 py-4 text-gray-600 border-b border-gray-300 text-xs sm:text-sm">
                       {item.username}
                     </td>
-                    <td className="px-6 py-4 text-gray-600 border-b border-gray-300">
-                      {item.email}
-                    </td>
-                    <td className="px-6 py-4 text-gray-600 border-b border-gray-300">
-                      {item.phone}
-                    </td>
-                    <td className="px-6 py-4 text-gray-600 border-b border-gray-300">
+                    <td className="px-6 py-4 text-gray-600 border-b border-gray-300 text-xs sm:text-sm">
                       {item.jobtitle}
                     </td>
+                    <td className="px-6 py-4 text-gray-600 border-b border-gray-300 text-xs sm:text-sm">
+                      {item.leavetype}
+                    </td>
+                    <td className="px-6 py-4 text-gray-600 border-b border-gray-300 text-xs sm:text-sm">
+                      {formatDate(item.startDate)}
+                    </td>
+                    <td className="px-6 py-4 text-gray-600 border-b border-gray-300 text-xs sm:text-sm">
+                      {formatDate(item.endDate)}
+                    </td>
+                    <td className="px-6 py-4 text-gray-600 border-b border-gray-300 text-xs sm:text-sm">
+                      {item.reason}
+                    </td>
                     <td className="px-6 py-4 text-gray-600 border-b border-gray-300">
-                      <select className="w-full py-2 px-4 bg-gray-50 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400">
+                      <select className="w-[115px] py-2 px-4 bg-gray-50 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400">
                         <option value="pending">Pending</option>
                         <option value="approved">Approved</option>
                         <option value="rejected">Rejected</option>

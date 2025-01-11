@@ -26,7 +26,15 @@ router.post("/applyLeave", authenticatetoken, async (req, res) => {
 
 router.get("/viewAllLeaves", async (req, res) => {
   try {
-    const allLeaves = await Leave.find();
+    const allLeaves = await Leave.find().populate(
+      "userId",
+      "profileImg username jobtitle email"
+    );
+
+    if (!allLeaves || allLeaves.length === 0) {
+      return res.status(404).json({ message: "Attendance records not found" });
+    }
+
     return res.status(200).json(allLeaves);
   } catch (error) {
     console.error(error);
