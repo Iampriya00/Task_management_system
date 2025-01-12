@@ -3,7 +3,7 @@ const Task = require("../model/task");
 const User = require("../model/user");
 const authenticatetoken = require("./userAuth");
 
-router.post("/addNewTask", async (req, res) => {
+router.post("/addNewTask", authenticatetoken, async (req, res) => {
   try {
     const { taskdetails, project, datedue, assignto, assignby } = req.body;
 
