@@ -15,14 +15,15 @@ function UserDashboard() {
     isLoading: attendenceLoading,
     isError,
   } = useQuery("attendance", attendance);
-  queryClient.invalidateQueries(`attendance`);
 
   const handleClockIn = async () => {
     await clockIn();
+    queryClient.invalidateQueries(`attendance`);
   };
 
   const handleClockOut = async () => {
     await clockOut();
+    queryClient.invalidateQueries(`attendance`);
   };
 
   return (

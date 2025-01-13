@@ -1,9 +1,9 @@
 import SideBar from "@/components/Dashboard/sideBar";
-import { applyEmpLeave } from "@/services/authservice";
+import { applyEmpLeave, viewleave } from "@/services/authservice";
 import { zodResolver } from "@hookform/resolvers/zod";
 import React from "react";
 import { useForm } from "react-hook-form";
-import { useMutation } from "react-query";
+import { useMutation, useQuery } from "react-query";
 import { toast } from "sonner";
 import { z } from "zod";
 
@@ -47,6 +47,17 @@ function LeaveManagement() {
       console.error("Error while applying leave:", error);
     }
   };
+
+  function formatDate(date) {
+    const d = new Date(date);
+    const day = String(d.getDate()).padStart(2, "0");
+    const month = String(d.getMonth() + 1).padStart(2, "0");
+    const year = d.getFullYear();
+
+    return `${day}/${month}/${year}`;
+  }
+
+  const { data: leaveData } = useQuery("viewleave", () => viewleave());
 
   return (
     <div className="flex min-h-screen bg-gray-100">
@@ -166,6 +177,51 @@ function LeaveManagement() {
               </button>
             </div>
           </form>
+
+          {/* Leave Data Table */}
+          <div className="overflow-x-auto mt-6">
+            <table className="min-w-full bg-white border border-gray-200 rounded-lg shadow-lg">
+              <thead className="bg-gray-100">
+                <tr>
+                  {[
+                    "Leave Type",
+                    "Start Date",
+                    "End Date",
+                    "Reason",
+                    "Status",
+                  ].map((header) => (
+                    <th
+                      key={header}
+                      className="text-left text-gray-700 px-6 py-4 border-b border-gray-300 text-sm sm:text-base"
+                    >
+                      {header}
+                    </th>
+                  ))}
+                </tr>
+              </thead>
+              <tbody>
+                {leaveData?.map((leaveItem) => (
+                  <tr key={leaveItem._id}>
+                    <td className="px-6 py-4 text-gray-600 border-b border-gray-300 text-xs sm:text-sm">
+                      {leaveItem.leavetype}
+                    </td>
+                    <td className="px-6 py-4 text-gray-600 border-b border-gray-300 text-xs sm:text-sm">
+                      {formatDate(leaveItem.startDate)}
+                    </td>
+                    <td className="px-6 py-4 text-gray-600 border-b border-gray-300 text-xs sm:text-sm">
+                      {formatDate(leaveItem.endDate)}
+                    </td>
+                    <td className="px-6 py-4 text-gray-600 border-b border-gray-300 text-xs sm:text-sm">
+                      {leaveItem.reason}
+                    </td>
+                    <td className="px-6 py-4 text-gray-600 border-b border-gray-300 text-xs sm:text-sm">
+                      {leaveItem.status}
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
         </div>
       </div>
     </div>

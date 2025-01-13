@@ -141,3 +141,24 @@ export const viewAllLeave = async (data) => {
     console.log(error);
   }
 };
+export const leaveStatus = async (id, statusData) => {
+  try {
+    const response = await axios.post(`/updateLeaveStatus/${id}`, statusData);
+    console.log("Response data:", response.data);
+    return response.data;
+  } catch (error) {
+    console.error("Error updating status:", error);
+    throw error;
+  }
+};
+
+export const viewleave = async (id) => {
+  try {
+    const response = await axios.get(`/viewLeavebyUser/${id}`);
+    console.log("Response data:", response.data);
+    return response.data;
+  } catch (error) {
+    console.error("Error updating status:", error);
+    throw error;
+  }
+};
