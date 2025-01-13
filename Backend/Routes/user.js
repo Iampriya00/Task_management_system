@@ -225,5 +225,41 @@ router.post("/updateinformation", authenticatetoken, async (req, res) => {
   }
 });
 
+// router.post("/forgot-password", async (req, res) => {
+//   const { email } = req.body;
+
+//   try {
+//     // Check if the user exists
+//     const user = await User.findOne({ email });
+//     if (!user) {
+//       return res.status(404).json({ message: "User not found" });
+//     }
+
+//     // Generate a reset token
+//     const authClaim = {
+//       username: user.username,
+//       id: user._id,
+//     };
+//     const token = jwt.sign(authClaim, process.env.JWT_SECRET, {
+//       expiresIn: "10m", // Token valid for 10 minutes
+//     });
+
+//     // Save the token and expiry time to the user document
+//     user.resetPasswordToken = token;
+//     await user.save();
+
+//     // Construct the reset URL
+//     const resetUrl = `http://localhost:5173/reset-password/${token}`;
+
+//     // Send password reset email
+//     await sendResetEmail(user.email, resetUrl);
+
+//     res.status(200).json({ message: "Password reset email sent successfully" });
+//   } catch (error) {
+//     console.error("Error in forgot-password API:", error);
+//     res.status(500).json({ message: "Internal server error" });
+//   }
+// });
+
 router.post;
 module.exports = router;
