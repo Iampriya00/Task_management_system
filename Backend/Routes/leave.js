@@ -33,7 +33,10 @@ router.post("/applyLeave", authenticatetoken, async (req, res) => {
 // View all leaves route
 router.get("/viewAllLeaves", authenticatetoken, async (req, res) => {
   try {
-    const allLeaves = await Leave.find();
+    const allLeaves = await Leave.find().populate(
+      "userId",
+      "profileImg username email jobtitle"
+    );
 
     if (!allLeaves || allLeaves.length === 0) {
       return res.status(404).json({ message: "No leave records found" });

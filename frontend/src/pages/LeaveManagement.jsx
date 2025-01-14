@@ -1,5 +1,6 @@
 import SideBar from "@/components/Dashboard/sideBar";
-import { applyEmpLeave, viewleave } from "@/services/authservice";
+import { applyEmpLeave, viewLeave } from "@/services/authservice";
+import { useAppSelector } from "@/store/hooks";
 import { zodResolver } from "@hookform/resolvers/zod";
 import React from "react";
 import { useForm } from "react-hook-form";
@@ -8,6 +9,8 @@ import { toast } from "sonner";
 import { z } from "zod";
 
 function LeaveManagement() {
+  const { _id } = useAppSelector((state) => state.user.user);
+
   const formSchema = z.object({
     leavetype: z.string().min(1, { message: "Please select leave type" }),
     startDate: z.string().min(1, { message: "Please select start date" }),
@@ -57,7 +60,13 @@ function LeaveManagement() {
     return `${day}/${month}/${year}`;
   }
 
-  const { data: leaveData } = useQuery("viewleave", () => viewleave());
+  const { data: leaveData } = useQuery(
+    ["viewLeavebyUser", _id],
+    () => viewLeave(_id),
+    {
+      enabled: !!_id,
+    }
+  );
 
   return (
     <div className="flex min-h-screen bg-gray-100">
@@ -180,7 +189,10 @@ function LeaveManagement() {
 
           {/* Leave Data Table */}
           <div className="overflow-x-auto mt-6">
-            <table className="min-w-full bg-white border border-gray-200 rounded-lg shadow-lg">
+            <table
+              className="min-w-full bg-white border border-gray-200 rounded-lg shadow-lg"
+              aria-label="Leave Records Table"
+            >
               <thead className="bg-gray-100">
                 <tr>
                   {[
@@ -200,25 +212,36 @@ function LeaveManagement() {
                 </tr>
               </thead>
               <tbody>
-                {leaveData?.map((leaveItem) => (
-                  <tr key={leaveItem._id}>
-                    <td className="px-6 py-4 text-gray-600 border-b border-gray-300 text-xs sm:text-sm">
-                      {leaveItem.leavetype}
-                    </td>
-                    <td className="px-6 py-4 text-gray-600 border-b border-gray-300 text-xs sm:text-sm">
-                      {formatDate(leaveItem.startDate)}
-                    </td>
-                    <td className="px-6 py-4 text-gray-600 border-b border-gray-300 text-xs sm:text-sm">
-                      {formatDate(leaveItem.endDate)}
-                    </td>
-                    <td className="px-6 py-4 text-gray-600 border-b border-gray-300 text-xs sm:text-sm">
-                      {leaveItem.reason}
-                    </td>
-                    <td className="px-6 py-4 text-gray-600 border-b border-gray-300 text-xs sm:text-sm">
-                      {leaveItem.status}
+                {leaveData && leaveData.length > 0 ? (
+                  leaveData.map((leaveItem) => (
+                    <tr key={leaveItem._id} className="hover:bg-gray-50">
+                      <td className="px-6 py-4 text-gray-600 border-b border-gray-300 text-xs sm:text-sm">
+                        {leaveItem.leavetype}
+                      </td>
+                      <td className="px-6 py-4 text-gray-600 border-b border-gray-300 text-xs sm:text-sm">
+                        {formatDate(leaveItem.startDate)}
+                      </td>
+                      <td className="px-6 py-4 text-gray-600 border-b border-gray-300 text-xs sm:text-sm">
+                        {formatDate(leaveItem.endDate)}
+                      </td>
+                      <td className="px-6 py-4 text-gray-600 border-b border-gray-300 text-xs sm:text-sm">
+                        {leaveItem.reason}
+                      </td>
+                      <td className="px-6 py-4 text-gray-600 border-b border-gray-300 text-xs sm:text-sm">
+                        {leaveItem.status || "Pending"}
+                      </td>
+                    </tr>
+                  ))
+                ) : (
+                  <tr>
+                    <td
+                      colSpan="5"
+                      className="px-6 py-4 text-center text-gray-600 border-b border-gray-300 text-sm sm:text-base"
+                    >
+                      No leave records found.
                     </td>
                   </tr>
-                ))}
+                )}
               </tbody>
             </table>
           </div>

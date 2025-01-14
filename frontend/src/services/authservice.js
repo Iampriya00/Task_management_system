@@ -132,7 +132,7 @@ export const applyEmpLeave = async (data) => {
   }
 };
 
-export const viewAllLeave = async (data) => {
+export const viewAllLeave = async () => {
   try {
     const response = await axios.get("/viewAllLeaves");
     console.log("Response data:", response.data);
@@ -152,13 +152,16 @@ export const leaveStatus = async (id, statusData) => {
   }
 };
 
-export const viewleave = async (id) => {
+export const viewLeave = async (id) => {
   try {
     const response = await axios.get(`/viewLeavebyUser/${id}`);
     console.log("Response data:", response.data);
     return response.data;
   } catch (error) {
-    console.error("Error updating status:", error);
+    console.error(
+      "Error fetching leave records:",
+      error.response?.data || error.message
+    );
     throw error;
   }
 };
