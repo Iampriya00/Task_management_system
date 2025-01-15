@@ -60,7 +60,9 @@ function LeaveManagement() {
     return `${day}/${month}/${year}`;
   }
 
-  const { data: leaveData } = useQuery(["viewLeavebyUser", viewLeave(_id)]);
+  const { data: leaveData } = useQuery(["viewLeavebyUser", _id], () =>
+    viewLeave(_id)
+  );
 
   return (
     <div className="flex min-h-screen bg-gray-100">
