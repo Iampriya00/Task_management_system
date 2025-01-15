@@ -38,8 +38,15 @@ export const addEmp = async (data) => {
 };
 
 export const empDetails = async (id) => {
-  const { data } = await axios.get(`/empInformation/${id}`);
-  return data;
+  try {
+    const { data } = await axios.get(`/empInformation/${id}`);
+    return data;
+  } catch (error) {
+    console.error(
+      "Error fetching employee details:",
+      error.response || error.message
+    );
+  }
 };
 
 export const deleteEmp = async (id) => {

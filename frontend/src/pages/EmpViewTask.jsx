@@ -44,7 +44,7 @@ function EmpViewTask() {
     <div className="flex min-h-screen bg-gray-100">
       <SideBar />
       <div className="flex-1 p-6 md:p-10">
-        <div className="max-w-4xl mx-auto bg-white shadow-lg rounded-lg p-6">
+        <div className="max-w-4xl mx-auto rounded-lg p-6">
           <h1 className="text-3xl font-semibold text-center mb-6 text-gray-800">
             Task Details
           </h1>

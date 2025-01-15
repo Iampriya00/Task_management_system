@@ -2,8 +2,9 @@ import SideBar from "@/components/Dashboard/sideBar";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { empDetails, viewTask } from "@/services/authservice";
 import React from "react";
+import { FaEdit } from "react-icons/fa";
 import { useQuery } from "react-query";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 
 function Viewemp() {
   const { id } = useParams();
@@ -19,18 +20,25 @@ function Viewemp() {
             <h1 className="text-3xl font-semibold text-center mb-6 text-gray-800">
               Employee Information
             </h1>
-            <div className="flex items-center p-6">
-              <Avatar className="size-24">
-                <AvatarImage src={employee?.profileImg} />
-                <AvatarFallback>
-                  {employee?.username[0].toUpperCase()}
-                </AvatarFallback>
-              </Avatar>
-              <div className="ml-4">
-                <h2 className="text-xl font-semibold text-gray-800">
-                  {employee?.username}
-                </h2>
-                <p className="text-gray-600">{employee?.jobtitle}</p>
+            <div className="flex items-center justify-between p-6">
+              <div>
+                <Avatar className="size-24">
+                  <AvatarImage src={employee?.profileImg} />
+                  <AvatarFallback>
+                    {employee?.username[0].toUpperCase()}
+                  </AvatarFallback>
+                </Avatar>
+                <div className="ml-4">
+                  <h2 className="text-xl font-semibold text-gray-800">
+                    {employee?.username}
+                  </h2>
+                  <p className="text-gray-600">{employee?.jobtitle}</p>
+                </div>
+              </div>
+              <div className="text-slate-950">
+                <Link to={`/adminuseredit/${id}`}>
+                  <FaEdit />
+                </Link>
               </div>
             </div>
             <div className="flex border-y border-gray-300 justify-between">

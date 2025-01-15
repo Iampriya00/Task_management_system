@@ -13,6 +13,7 @@ import EmpViewTask from "./pages/EmpViewTask";
 import ViewAttendence from "./pages/ViewAttendence";
 import LeaveManagement from "./pages/LeaveManagement";
 import Leaves from "./pages/Leaves";
+import AdminUserEdit from "./pages/AdminUserEdit";
 
 function App() {
   return (
@@ -105,6 +106,14 @@ function App() {
           element={
             <AuthWrapper requiredRole={["admin"]}>
               <Leaves />
+            </AuthWrapper>
+          }
+        />
+        <Route
+          path="/adminuseredit/:id"
+          element={
+            <AuthWrapper requiredRole={["admin"]}>
+              <AdminUserEdit />
             </AuthWrapper>
           }
         />

@@ -167,7 +167,7 @@ router.get("/empInformation/:id", authenticatetoken, async (req, res) => {
 
     res.status(200).json(user);
   } catch (error) {
-    return res.status(500).json({ message: "Internal Server Error" });
+    console.error(error);
   }
 });
 
