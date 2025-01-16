@@ -6,6 +6,9 @@ import { useForm } from "react-hook-form";
 import { useParams } from "react-router-dom";
 import { useMutation, useQuery } from "react-query";
 import { empDetails, userEdit } from "@/services/authservice";
+import { Button } from "@/components/ui/button";
+import { toast } from "sonner";
+import queryClient from "@/utils/react-query";
 
 function AdminUserEdit() {
   const { id } = useParams();
@@ -14,14 +17,10 @@ function AdminUserEdit() {
   );
 
   const formSchema = z.object({
-    name: z.string().min(2, {
-      message: "Name is required.",
-    }),
-    email: z.string().email({
-      message: "Invalid email format",
-    }),
+    username: z.string().min(2, { message: "Name is required." }),
+    email: z.string().email({ message: "Invalid email format" }),
     phone: z.string().min(1, { message: "Phone number is required" }),
-    image: z
+    profileImg: z
       .string()
       .url({ message: "Invalid image URL" })
       .min(1, { message: "Image URL is required" }),
@@ -44,16 +43,26 @@ function AdminUserEdit() {
   const { mutateAsync: editUserMutation } = useMutation(userEdit, {
     onSuccess: () => {
       toast.success("Updated Successfully");
-      queryClient.invalidateQueries("userInfo");
-      window.location.href = "/user";
+    },
+    onError: (error) => {
+      console.error("Error updating user:", error);
+      toast.error("Update failed");
     },
   });
   const handleSubmit = async (data) => {
-    await editUserMutation({
-      profileImg: data.image,
-      username: data.name,
-      phone: data.phone,
-    });
+    console.log("Submitted Data:", data);
+    try {
+      await editUserMutation({
+        profileImg: data.profileImg,
+        username: data.username,
+        phone: data.phone,
+        jobtitle: data.jobtitle,
+        salary: data.salary,
+      });
+      queryClient.invalidateQueries(`empDetails/${id}`);
+    } catch (error) {
+      console.error("Error while editing user:", error);
+    }
   };
   if (isLoading) return <div>Loading...</div>;
 
@@ -62,7 +71,7 @@ function AdminUserEdit() {
       <div className="flex">
         <SideBar />
         <div className="w-3/4 flex items-center justify-center h-screen">
-          <div className="container p-20 ">
+          <div className="container p-20">
             <h1 className="text-2xl mb-6 text-center font-semibold">
               Edit Your Information
             </h1>
@@ -77,9 +86,14 @@ function AdminUserEdit() {
                 <input
                   type="text"
                   placeholder="Enter your Name"
-                  className="w-full p-2 border border-gray-300 rounded-md"
+                  className="w-full p-2 border text-slate-800 border-gray-300 rounded-md"
                   {...form.register("username")}
                 />
+                {form.formState.errors.username && (
+                  <span className="text-red-500 text-sm">
+                    {form.formState.errors.username.message}
+                  </span>
+                )}
               </div>
 
               <div className="mb-4">
@@ -93,9 +107,9 @@ function AdminUserEdit() {
                   type="email"
                   id="email"
                   placeholder="Enter your email"
-                  className="w-full p-2 border border-gray-300 rounded-md"
+                  className="w-full p-2 border text-slate-800 border-gray-300 rounded-md"
                   {...form.register("email")}
-                  disabled
+                  readOnly
                 />
               </div>
 
@@ -109,9 +123,14 @@ function AdminUserEdit() {
                 <input
                   type="text"
                   placeholder="Enter your number"
-                  className="w-full p-2 border border-gray-300 rounded-md"
+                  className="w-full p-2 border text-slate-800 border-gray-300 rounded-md"
                   {...form.register("phone")}
                 />
+                {form.formState.errors.phone && (
+                  <span className="text-red-500 text-sm">
+                    {form.formState.errors.phone.message}
+                  </span>
+                )}
               </div>
 
               <div className="mb-4">
@@ -119,15 +138,21 @@ function AdminUserEdit() {
                   className="block text-gray-700 text-sm font-bold mb-2"
                   htmlFor="image"
                 >
-                  Image:
+                  Image URL:
                 </label>
                 <input
                   type="text"
                   placeholder="Enter your image URL"
-                  className="w-full p-2 border border-gray-300 rounded-md"
+                  className="w-full p-2 border text-slate-800 border-gray-300 rounded-md"
                   {...form.register("profileImg")}
                 />
+                {form.formState.errors.profileImg && (
+                  <span className="text-red-500 text-sm">
+                    {form.formState.errors.profileImg.message}
+                  </span>
+                )}
               </div>
+
               <div className="mb-4">
                 <label
                   className="block text-gray-700 text-sm font-bold mb-2"
@@ -137,9 +162,14 @@ function AdminUserEdit() {
                 </label>
                 <input
                   type="text"
-                  className="w-full p-2 border border-gray-300 rounded-md"
+                  className="w-full p-2 border text-slate-800 border-gray-300 rounded-md"
                   {...form.register("jobtitle")}
                 />
+                {form.formState.errors.jobtitle && (
+                  <span className="text-red-500 text-sm">
+                    {form.formState.errors.jobtitle.message}
+                  </span>
+                )}
               </div>
 
               <div className="mb-4">
@@ -151,17 +181,23 @@ function AdminUserEdit() {
                 </label>
                 <input
                   type="text"
-                  className="w-full p-2 border border-gray-300 rounded-md"
+                  className="w-full text-slate-800 p-2 border border-gray-300 rounded-md"
                   {...form.register("salary")}
                 />
+                {form.formState.errors.salary && (
+                  <span className="text-red-500 text-sm">
+                    {form.formState.errors.salary.message}
+                  </span>
+                )}
               </div>
 
-              <button
-                type="submit"
-                className="w-full p-2 bg-blue-500 text-white rounded-md"
+              <Button
+                className="w-full"
+                variant="secondary"
+                loading={isLoading}
               >
                 Submit
-              </button>
+              </Button>
             </form>
           </div>
         </div>
