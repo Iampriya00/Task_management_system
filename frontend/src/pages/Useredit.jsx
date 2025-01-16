@@ -17,17 +17,15 @@ function UserEdit() {
     name: z.string().min(2, {
       message: "Name is required.",
     }),
-    email: z.string().min(1, { message: "Email is required" }).email({
-      message: "Invalid email format",
-    }),
+    email: z.string().optional(),
     phone: z.string().min(1, { message: "Phone number is required" }),
 
     image: z
       .string()
       .url({ message: "Invalid image URL" })
       .min(1, { message: "Image URL is required" }),
-    jobtitle: z.string().min(1, { message: "Please enter a valid job title" }),
-    salary: z.string().min(1, { message: "Please enter a YOUR SALARY" }),
+    jobtitle: z.string().optional(),
+    salary: z.string().optional(),
   });
   const form = useForm({
     resolver: zodResolver(formSchema),
@@ -45,10 +43,16 @@ function UserEdit() {
     onSuccess: () => {
       toast.success("Updated Successfully");
       queryClient.invalidateQueries("userInfo");
-      window.location.href = "/user";
+      // window.location.href = "/user";
     },
   });
   const handleSubmit = async (data) => {
+    // console.log({
+    //   profileImg: data.image,
+    //   username: data.name,
+    //   phone: data.phone,
+    // });
+
     await editUserMutation({
       profileImg: data.image,
       username: data.name,
@@ -160,7 +164,12 @@ function UserEdit() {
               </>
             )}
 
-            <Button className="w-full" variant="secondary" loading={isLoading}>
+            <Button
+              className="w-full"
+              variant="secondary"
+              loading={isLoading}
+              type="submit"
+            >
               Submit
             </Button>
           </form>

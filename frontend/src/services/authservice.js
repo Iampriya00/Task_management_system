@@ -17,7 +17,10 @@ export const userEdit = async (data) => {
   const response = await axios.post("/updateinformation", data);
   return response.data.data;
 };
-
+export const updateUserByAdmin = async ({ id, data }) => {
+  const response = await axios.post(`/updateUserInfoByAdmin/${id}`, data);
+  return response.data;
+};
 export const userDetails = async () => {
   const response = await axios.get("/userInformation");
   store.dispatch(setUser(response.data));

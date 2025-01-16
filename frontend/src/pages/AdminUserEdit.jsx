@@ -1,19 +1,27 @@
 import SideBar from "@/components/Dashboard/sideBar";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
-import React from "react";
+import React, { useCallback, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { useParams } from "react-router-dom";
 import { useMutation, useQuery } from "react-query";
-import { empDetails, userEdit } from "@/services/authservice";
+import {
+  empDetails,
+  updateUserByAdmin,
+  userEdit,
+} from "@/services/authservice";
 import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
 import queryClient from "@/utils/react-query";
 
 function AdminUserEdit() {
   const { id } = useParams();
-  const { data: user, isLoading } = useQuery(`empDetails/${id}`, () =>
-    empDetails(id)
+  const { data: user, isLoading } = useQuery(
+    `empDetails/${id}`,
+    () => empDetails(id),
+    {
+      refetchOnMount: "always",
+    }
   );
 
   const formSchema = z.object({
@@ -31,34 +39,45 @@ function AdminUserEdit() {
   const form = useForm({
     resolver: zodResolver(formSchema),
     defaultValues: {
+      username: "",
+      email: "",
+      phone: "",
+      profileImg: "",
+      jobtitle: "",
+    },
+  });
+  const onLoad = useCallback(() => {
+    if (!user) return;
+    form.reset({
       username: user?.username || "",
       email: user?.email || "",
       phone: user?.phone || "",
       profileImg: user?.profileImg || "",
       jobtitle: user?.jobtitle || "",
-      salary: user?.salary || "",
-    },
-  });
-
-  const { mutateAsync: editUserMutation } = useMutation(userEdit, {
-    onSuccess: () => {
-      toast.success("Updated Successfully");
-    },
-    onError: (error) => {
-      console.error("Error updating user:", error);
-      toast.error("Update failed");
-    },
-  });
+      salary: String(user?.salary) || "",
+    });
+  }, [user, form]);
+  useEffect(() => {
+    if (user) {
+      onLoad();
+    }
+  }, [onLoad, user]);
+  const { mutateAsync: updateUserByAdminMutation } = useMutation(
+    updateUserByAdmin,
+    {
+      onSuccess: () => {
+        toast.success("User updated Successfully");
+      },
+      onError: (error) => {
+        console.error("Error updating user:", error);
+        toast.error("Update failed");
+      },
+    }
+  );
   const handleSubmit = async (data) => {
-    console.log("Submitted Data:", data);
+    console.log("Submitted Data:", { id, ...data });
     try {
-      await editUserMutation({
-        profileImg: data.profileImg,
-        username: data.username,
-        phone: data.phone,
-        jobtitle: data.jobtitle,
-        salary: data.salary,
-      });
+      await updateUserByAdminMutation({ id, data });
       queryClient.invalidateQueries(`empDetails/${id}`);
     } catch (error) {
       console.error("Error while editing user:", error);

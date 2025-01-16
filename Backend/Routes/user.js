@@ -225,6 +225,46 @@ router.post("/updateinformation", authenticatetoken, async (req, res) => {
   }
 });
 
+router.post(
+  "/updateUserInfoByAdmin/:id",
+  authenticatetoken,
+  async (req, res) => {
+    try {
+      const { id } = req.params;
+      if (!id) {
+        return res.status(401).json({ message: "Missing user ID" });
+      }
+
+      const { username, phone, profileImg, jobtitle, salary } = req.body;
+
+      if (!username && !phone && !profileImg && !jobtitle && !salary) {
+        return res.status(400).json({
+          message: "At least one field is required",
+        });
+      }
+
+      const updateUser = await User.findByIdAndUpdate(
+        id,
+        { username, phone, profileImg, jobtitle, salary },
+        { new: true }
+      ).select("-password");
+
+      if (!updateUser) {
+        return res.status(404).json({ message: "User not found" });
+      }
+
+      // Respond with updated user details
+      return res.status(200).json({
+        message: "User details updated successfully",
+        user: updateUser,
+      });
+    } catch (error) {
+      // Log the error for debugging
+      console.error("Error updating user information:", error);
+      return res.status(500).json({ message: "Internal Server Error" });
+    }
+  }
+);
 // router.post("/forgot-password", async (req, res) => {
 //   const { email } = req.body;
 
@@ -261,5 +301,4 @@ router.post("/updateinformation", authenticatetoken, async (req, res) => {
 //   }
 // });
 
-router.post;
 module.exports = router;
