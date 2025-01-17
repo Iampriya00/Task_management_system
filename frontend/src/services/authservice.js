@@ -175,3 +175,24 @@ export const viewLeave = async (id) => {
     throw error;
   }
 };
+
+export const addProject = async (data) => {
+  try {
+    const response = await axios.post("/addNewProject", data);
+    console.log(response.data);
+    return response.data;
+  } catch (error) {
+    console.error(error.response?.data || error.message);
+    throw error;
+  }
+};
+
+export const viewProject = async () => {
+  try {
+    const viewProject = await axios.get("/viewAllProject");
+    return viewProject.data;
+  } catch (error) {
+    console.error(error.response?.data || error.message);
+    throw error;
+  }
+};

@@ -13,11 +13,11 @@ function Viewemp() {
 
   return (
     <div>
-      <div className="flex min-h-screen bg-gray-100">
+      <div className="flex min-h-screen">
         <SideBar />
-        <div className="flex-1 p-6 md:p-10">
-          <div className="max-w-4xl mx-auto bg-white shadow-lg rounded-lg p-6">
-            <h1 className="text-3xl font-semibold text-center mb-6 text-gray-800">
+        <div className="w-3/4 flex-1 p-6">
+          <div className="max-w-4xl mx-auto shadow-lg rounded-lg p-6">
+            <h1 className="text-3xl font-semibold text-center mb-6 text-gray-400">
               Employee Information
             </h1>
             <div className="flex items-center justify-between p-6">
@@ -29,10 +29,10 @@ function Viewemp() {
                   </AvatarFallback>
                 </Avatar>
                 <div className="ml-4">
-                  <h2 className="text-xl font-semibold text-gray-800">
+                  <h2 className="text-xl font-semibold text-gray-400">
                     {employee?.username}
                   </h2>
-                  <p className="text-gray-600">{employee?.jobtitle}</p>
+                  <p className="text-gray-400">{employee?.jobtitle}</p>
                 </div>
               </div>
               <div className="text-slate-950">
@@ -44,27 +44,27 @@ function Viewemp() {
             <div className="flex border-y border-gray-300 justify-between">
               <div className="p-4">
                 <div className="mb-3">
-                  <h3 className="text-gray-800 font-medium">Email</h3>
-                  <p className="text-gray-600">{employee?.email}</p>
+                  <h3 className="text-gray-400 font-medium">Email</h3>
+                  <p className="text-gray-300">{employee?.email}</p>
                 </div>
                 <div className="mb-3">
-                  <h3 className="text-gray-800 font-medium">Phone</h3>
-                  <p className="text-gray-600">{employee?.phone}</p>
+                  <h3 className="text-gray-400 font-medium">Phone</h3>
+                  <p className="text-gray-300">{employee?.phone}</p>
                 </div>
                 <div className="mb-3">
-                  <h3 className="text-gray-800 font-medium">Salary</h3>
-                  <p className="text-gray-600">{employee?.salary}</p>
+                  <h3 className="text-gray-400 font-medium">Salary</h3>
+                  <p className="text-gray-300">{employee?.salary}</p>
                 </div>
                 <div>
-                  <h3 className="text-gray-800 font-medium">Role</h3>
-                  <p className="text-gray-600">{employee?.role}</p>
+                  <h3 className="text-gray-400 font-medium">Role</h3>
+                  <p className="text-gray-300">{employee?.role}</p>
                 </div>
               </div>
               <div className="border-gray-300 p-4">
-                <p className="text-gray-500 text-sm">
+                <p className="text-gray-400 text-sm">
                   Created at: {new Date(employee?.createdAt).toLocaleString()}
                 </p>
-                <p className="text-gray-500 text-sm">
+                <p className="text-gray-400 text-sm">
                   Updated at: {new Date(employee?.updatedAt).toLocaleString()}
                 </p>
               </div>

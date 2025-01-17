@@ -14,6 +14,8 @@ import ViewAttendence from "./pages/ViewAttendence";
 import LeaveManagement from "./pages/LeaveManagement";
 import Leaves from "./pages/Leaves";
 import AdminUserEdit from "./pages/AdminUserEdit";
+import AddNewProject from "./pages/AddNewProject";
+import Department from "./pages/Department";
 
 function App() {
   return (
@@ -114,6 +116,22 @@ function App() {
           element={
             <AuthWrapper requiredRole={["admin"]}>
               <AdminUserEdit />
+            </AuthWrapper>
+          }
+        />
+        <Route
+          path="/addNewProject"
+          element={
+            <AuthWrapper requiredRole={["admin"]}>
+              <AddNewProject />
+            </AuthWrapper>
+          }
+        />
+        <Route
+          path="/departments"
+          element={
+            <AuthWrapper requiredRole={["admin"]}>
+              <Department />
             </AuthWrapper>
           }
         />

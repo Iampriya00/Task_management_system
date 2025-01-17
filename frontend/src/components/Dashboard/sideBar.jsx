@@ -108,6 +108,14 @@ function SideBar() {
                   Add New Task
                 </Link>
               </li>
+              <li>
+                <Link
+                  to="/addNewProject"
+                  className="block text-white font-semibold hover:text-blue-200"
+                >
+                  Add New Project
+                </Link>
+              </li>
             </>
           )}
 

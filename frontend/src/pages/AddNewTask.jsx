@@ -3,14 +3,18 @@ import { Input } from "@/components/ui/input";
 import { zodResolver } from "@hookform/resolvers/zod";
 import React from "react";
 import { useForm } from "react-hook-form";
-import { useMutation } from "react-query";
+import { useMutation, useQuery } from "react-query";
 import { useNavigate } from "react-router-dom";
 import { z } from "zod";
 import { toast } from "sonner";
-import { addTask } from "@/services/authservice";
+import { addTask, viewProject } from "@/services/authservice";
 
 function AddNewTask() {
   const navigate = useNavigate();
+
+  const { data: projectData } = useQuery("viewProject", viewProject, {
+    refetchOnWindowFocus: false,
+  });
 
   const formSchema = z.object({
     taskdetails: z.string().min(1, "Task is required"),
@@ -80,15 +84,20 @@ function AddNewTask() {
               )}
             </div>
             <div className="mb-4">
-              <label className="block text-gray-700 text-sm font-bold mb-2">
+              <label className="block text-sm font-bold mb-2">
                 Project Name:
               </label>
-              <Input
-                type="text"
-                placeholder="Enter Project Name"
-                className="w-full p-2 border border-gray-300 rounded-md"
+              <select
+                className="w-full p-2 border border-gray-300 rounded-md bg-slate-900"
                 {...register("project")}
-              />
+              >
+                <option value="">Select a Project</option>
+                {projectData?.map((project, index) => (
+                  <option key={index} value={project.projectname}>
+                    {project.projectname}
+                  </option>
+                ))}
+              </select>
               {errors.project && (
                 <p className="text-red-500 text-xs">{errors.project.message}</p>
               )}

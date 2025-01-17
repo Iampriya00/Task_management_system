@@ -155,7 +155,7 @@ function AddNewEmp() {
                 inputMode="numeric"
                 {...register("salary")}
                 onInput={(e) => {
-                  e.target.value = e.target.value.replace(/[^0-9]/g, ""); // Remove any non-numeric characters
+                  e.target.value = e.target.value.replace(/[^0-9]/g, "");
                 }}
                 className="w-full p-2 border text-slate-700 border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
               />

@@ -53,17 +53,17 @@ function Leaves() {
   }
 
   return (
-    <div className="flex min-h-screen bg-gray-100">
+    <div className="flex min-h-screen">
       <SideBar />
-      <div className="flex-1 p-6 md:p-10">
+      <div className="w-3/4 flex-1 p-6 md:p-10">
         <div className="max-w-lg mx-auto">
           <h1 className="text-2xl text-center font-semibold mb-4 text-gray-700">
             View All Leaves
           </h1>
         </div>
         <div className="overflow-x-auto">
-          <table className="min-w-full bg-white border border-gray-200 rounded-lg shadow-lg">
-            <thead className="bg-gray-100">
+          <table className="min-w-full border border-gray-200 rounded-lg shadow-lg">
+            <thead>
               <tr>
                 {[
                   "Employee Name",
@@ -89,9 +89,7 @@ function Leaves() {
                 empData.map((item, idx) => (
                   <tr
                     key={item._id}
-                    className={`cursor-pointer ${
-                      idx % 2 === 0 ? "bg-gray-50" : "bg-white"
-                    } hover:bg-gray-100 transition-all duration-300`}
+                    className={`cursor-pointer hover:bg-gray-100 transition-all duration-300`}
                   >
                     <td className="px-6 py-4 text-gray-600 border-b border-gray-300 text-xs sm:text-sm">
                       {item.userId?.username || "N/A"}
@@ -116,7 +114,7 @@ function Leaves() {
                     </td>
                     <td className="px-6 py-4 text-gray-600 border-b border-gray-300">
                       <select
-                        className="w-[115px] py-2 px-4 bg-gray-50 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400"
+                        className="w-[115px] py-2 px-4 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400"
                         value={item.status}
                         onChange={(e) => handleStatusChange(e, item._id)}
                       >

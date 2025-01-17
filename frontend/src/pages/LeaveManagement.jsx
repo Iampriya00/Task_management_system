@@ -65,9 +65,9 @@ function LeaveManagement() {
   );
 
   return (
-    <div className="flex min-h-screen bg-gray-100">
+    <div className="flex min-h-screen">
       <SideBar />
-      <div className="flex-1 p-6 md:p-10">
+      <div className="w-3/4 flex-1 p-6 md:p-10">
         <div className="mx-auto">
           <h1 className="text-2xl font-semibold mb-4 text-gray-700">
             Leave Management
@@ -186,10 +186,10 @@ function LeaveManagement() {
           {/* Leave Data Table */}
           <div className="overflow-x-auto mt-6">
             <table
-              className="min-w-full bg-white border border-gray-200 rounded-lg shadow-lg"
+              className="min-w-full border border-gray-200 rounded-lg shadow-lg"
               aria-label="Leave Records Table"
             >
-              <thead className="bg-gray-100">
+              <thead>
                 <tr>
                   {[
                     "Leave Type",
@@ -200,7 +200,7 @@ function LeaveManagement() {
                   ].map((header) => (
                     <th
                       key={header}
-                      className="text-left text-gray-700 px-6 py-4 border-b border-gray-300 text-sm sm:text-base"
+                      className="text-left text-gray-500 px-6 py-4 border-b border-gray-300 text-sm sm:text-base"
                     >
                       {header}
                     </th>
@@ -211,19 +211,19 @@ function LeaveManagement() {
                 {leaveData && leaveData.length > 0 ? (
                   leaveData.map((leaveItem) => (
                     <tr key={leaveItem._id} className="hover:bg-gray-50">
-                      <td className="px-6 py-4 text-gray-600 border-b border-gray-300 text-xs sm:text-sm">
+                      <td className="px-6 py-4 text-gray-400 border-b border-gray-300 text-xs sm:text-sm">
                         {leaveItem.leavetype}
                       </td>
-                      <td className="px-6 py-4 text-gray-600 border-b border-gray-300 text-xs sm:text-sm">
+                      <td className="px-6 py-4 text-gray-400 border-b border-gray-300 text-xs sm:text-sm">
                         {formatDate(leaveItem.startDate)}
                       </td>
-                      <td className="px-6 py-4 text-gray-600 border-b border-gray-300 text-xs sm:text-sm">
+                      <td className="px-6 py-4 text-gray-400 border-b border-gray-300 text-xs sm:text-sm">
                         {formatDate(leaveItem.endDate)}
                       </td>
-                      <td className="px-6 py-4 text-gray-600 border-b border-gray-300 text-xs sm:text-sm">
+                      <td className="px-6 py-4 text-gray-400 border-b border-gray-300 text-xs sm:text-sm">
                         {leaveItem.reason}
                       </td>
-                      <td className="px-6 py-4 text-gray-600 border-b border-gray-300 text-xs sm:text-sm">
+                      <td className="px-6 py-4 text-gray-400 border-b border-gray-300 text-xs sm:text-sm">
                         {leaveItem.status || "Pending"}
                       </td>
                     </tr>

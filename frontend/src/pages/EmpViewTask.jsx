@@ -41,17 +41,17 @@ function EmpViewTask() {
     queryClient.invalidateQueries(`viewTask/${_id}`);
   };
   return (
-    <div className="flex min-h-screen bg-gray-100">
+    <div className="flex min-h-screen">
       <SideBar />
-      <div className="flex-1 p-6 md:p-10">
+      <div className="w-3/4 flex-1 p-6 md:p-10">
         <div className="max-w-4xl mx-auto rounded-lg p-6">
           <h1 className="text-3xl font-semibold text-center mb-6 text-gray-800">
             Task Details
           </h1>
 
           <div className="overflow-auto h-[700px]">
-            <table className="min-w-full table-auto border-collapse border border-gray-300">
-              <thead className="bg-gray-100 text-slate-700">
+            <table className="min-w-full table-auto border-collapse border">
+              <thead className=" text-slate-700">
                 <tr>
                   <th
                     scope="col"
