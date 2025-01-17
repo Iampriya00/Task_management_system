@@ -32,8 +32,8 @@ function Department() {
       .min(5, { message: "Please enter a valid description" }),
     manager: z.string().min(1, { message: "Please enter a manager name" }),
     employeeNumber: z
-      .number()
-      .positive({ message: "Please enter a valid number of employees" }),
+      .string()
+      .min(2, { message: "Please enter a valid number of employees" }),
   });
 
   const {
@@ -51,11 +51,10 @@ function Department() {
     },
   });
 
-  // Mutation for adding a department
   const { mutateAsync: addDeptMut } = useMutation(addDepartment, {
     onSuccess: () => {
       toast.success("Department added successfully");
-      reset(); // Reset form fields on success
+      reset();
     },
     onError: () => {
       toast.error("Failed to add department");
@@ -145,8 +144,8 @@ function Department() {
                   Number of Employees
                 </label>
                 <input
-                  type="number"
-                  {...register("employeeNumber", { valueAsNumber: true })}
+                  type="text"
+                  {...register("employeeNumber")}
                   placeholder="Enter Number of Employees"
                   className={`w-full p-3 border rounded-lg focus:outline-none focus:ring focus:ring-blue-300 ${
                     errors.employeeNumber ? "border-red-500" : "border-gray-300"
