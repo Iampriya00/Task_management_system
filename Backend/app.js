@@ -8,6 +8,7 @@ const task = require("./Routes/task");
 const clock = require("./Routes/clock");
 const leave = require("./Routes/leave");
 const project = require("./Routes/project");
+const department = require("./Routes/department");
 
 app.use(cors());
 app.use(express.json());
@@ -17,6 +18,7 @@ app.use(task);
 app.use(clock);
 app.use(leave);
 app.use(project);
+app.use(department);
 
 app.get("/", (res) => {
   res.send("Hello baby");

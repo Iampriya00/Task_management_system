@@ -1,7 +1,7 @@
 import SideBar from "@/components/Dashboard/sideBar";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { addProject, viewProject } from "@/services/authservice";
+import { addProject, deleteProject, viewProject } from "@/services/authservice";
 import { zodResolver } from "@hookform/resolvers/zod";
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
@@ -126,6 +126,9 @@ function AddNewProject() {
                     <th className="text-center border border-gray-300 px-4 py-2">
                       Project Description
                     </th>
+                    <th className="text-center border border-gray-300 px-4 py-2">
+                      Action
+                    </th>
                   </tr>
                 </thead>
                 <tbody>
@@ -140,6 +143,18 @@ function AddNewProject() {
                         </td>
                         <td className="text-center border border-gray-300 px-4 py-2">
                           {item.projectdescription}
+                        </td>
+                        <td className="text-center border border-gray-300 px-4 py-2">
+                          <Button
+                            className="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-md"
+                            onClick={() => {
+                              deleteProject(item._id).then(() => {
+                                window.location.reload();
+                              });
+                            }}
+                          >
+                            Delete
+                          </Button>
                         </td>
                       </tr>
                     ))

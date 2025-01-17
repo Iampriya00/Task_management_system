@@ -34,4 +34,20 @@ router.get("/viewAllProject", authenticateToken, async (req, res) => {
     return res.status(500).json({ message: "Internal Server Error" });
   }
 });
+
+router.delete("/deleteProject/:id", authenticateToken, async (req, res) => {
+  try {
+    const { id } = req.params;
+    const project = await Project.findByIdAndDelete(id);
+
+    if (!project) {
+      return res.status(404).json({ message: "Project not found" });
+    }
+    res.status(200).json({ message: "Project deleted successfully" });
+  } catch (error) {
+    console.error("Error deleting user:", error);
+    return res.status(500).json({ message: "Internal Server Error" });
+  }
+});
+
 module.exports = router;

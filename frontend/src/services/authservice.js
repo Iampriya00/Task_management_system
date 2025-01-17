@@ -196,3 +196,36 @@ export const viewProject = async () => {
     throw error;
   }
 };
+
+export const deleteProject = async (id) => {
+  try {
+    const response = await axios.delete(`/deleteProject/${id}`);
+    console.log(response.data);
+    return response.data;
+  } catch (error) {
+    console.error(error.response?.data || error.message);
+    throw error;
+  }
+};
+
+export const addDepartment = async (data) => {
+  try {
+    const response = await axios.post(`/addDepartment`);
+    console.log(response.data);
+    return response.data;
+  } catch (error) {
+    console.error(error.response?.data || error.message);
+    throw error;
+  }
+};
+
+export const viewAllDepartment = async () => {
+  try {
+    const response = await axios.get(`/viewAllDepartment`);
+    console.log(response.data);
+    return response.data;
+  } catch (error) {
+    console.error(error.response?.data || error.message);
+    throw error;
+  }
+};
