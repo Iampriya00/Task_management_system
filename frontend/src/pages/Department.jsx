@@ -1,6 +1,10 @@
 import SideBar from "@/components/Dashboard/sideBar";
 import { Button } from "@/components/ui/button";
-import { addDepartment, viewAllDepartment } from "@/services/authservice";
+import {
+  addDepartment,
+  deleteDepartment,
+  viewAllDepartment,
+} from "@/services/authservice";
 import { zodResolver } from "@hookform/resolvers/zod";
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
@@ -33,7 +37,7 @@ function Department() {
     manager: z.string().min(1, { message: "Please enter a manager name" }),
     employeeNumber: z
       .string()
-      .min(2, { message: "Please enter a valid number of employees" }),
+      .min(1, { message: "Please enter a valid number of employees" }),
   });
 
   const {
@@ -56,13 +60,21 @@ function Department() {
       toast.success("Department added successfully");
       reset();
     },
-    onError: () => {
+    onError: (error) => {
+      console.error("API Error: ", error); // Log error for debugging
       toast.error("Failed to add department");
     },
   });
 
   const handleDepartment = async (data) => {
-    await addDeptMut(data);
+    try {
+      // Submit the department data
+      await addDeptMut(data);
+      reset(); // Reset form after success
+    } catch (error) {
+      console.error("Error submitting department:", error);
+      toast.error("Failed to add department");
+    }
   };
 
   return (
@@ -80,15 +92,16 @@ function Department() {
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
               placeholder="Search departments..."
-              className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring focus:ring-blue-300"
+              className="w-full p-3 bg-black border border-gray-300 rounded-lg focus:outline-none focus:ring focus:ring-blue-300"
             />
           </div>
 
           <form
-            className="mb-8 bg-gray-50 p-6 rounded-lg shadow-md"
+            className="mb-8 bg-zinc-900 p-6 rounded-lg shadow-md"
             onSubmit={handleSubmit(handleDepartment)}
           >
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              {/* Department Name */}
               <div>
                 <label className="block text-gray-700 mb-2">
                   Department Name
@@ -97,7 +110,7 @@ function Department() {
                   type="text"
                   {...register("departmentname")}
                   placeholder="Enter Department Name"
-                  className={`w-full p-3 border rounded-lg focus:outline-none focus:ring focus:ring-blue-300 ${
+                  className={`w-full p-3 border bg-black rounded-lg focus:outline-none focus:ring focus:ring-blue-300 ${
                     errors.departmentname ? "border-red-500" : "border-gray-300"
                   }`}
                 />
@@ -107,13 +120,15 @@ function Department() {
                   </p>
                 )}
               </div>
+
+              {/* Description */}
               <div>
                 <label className="block text-gray-700 mb-2">Description</label>
                 <input
                   type="text"
                   {...register("departmentDes")}
                   placeholder="Enter Department Description"
-                  className={`w-full p-3 border rounded-lg focus:outline-none focus:ring focus:ring-blue-300 ${
+                  className={`w-full p-3 border bg-black rounded-lg focus:outline-none focus:ring focus:ring-blue-300 ${
                     errors.departmentDes ? "border-red-500" : "border-gray-300"
                   }`}
                 />
@@ -123,13 +138,15 @@ function Department() {
                   </p>
                 )}
               </div>
+
+              {/* Manager */}
               <div>
                 <label className="block text-gray-700 mb-2">Manager</label>
                 <input
                   type="text"
                   {...register("manager")}
                   placeholder="Enter Manager Name"
-                  className={`w-full p-3 border rounded-lg focus:outline-none focus:ring focus:ring-blue-300 ${
+                  className={`w-full p-3 border  bg-black rounded-lg focus:outline-none focus:ring focus:ring-blue-300 ${
                     errors.manager ? "border-red-500" : "border-gray-300"
                   }`}
                 />
@@ -139,15 +156,17 @@ function Department() {
                   </p>
                 )}
               </div>
+
+              {/* Employee Number */}
               <div>
                 <label className="block text-gray-700 mb-2">
-                  Number of Employees
+                  Employee Number
                 </label>
                 <input
                   type="text"
                   {...register("employeeNumber")}
-                  placeholder="Enter Number of Employees"
-                  className={`w-full p-3 border rounded-lg focus:outline-none focus:ring focus:ring-blue-300 ${
+                  placeholder="Enter Employee Number"
+                  className={`w-full p-3 border bg-black rounded-lg focus:outline-none focus:ring focus:ring-blue-300 ${
                     errors.employeeNumber ? "border-red-500" : "border-gray-300"
                   }`}
                 />
@@ -158,54 +177,72 @@ function Department() {
                 )}
               </div>
             </div>
+
             <Button className="w-full mt-4 bg-blue-600 hover:bg-blue-700 text-white">
               Submit
             </Button>
           </form>
 
           {/* Departments Table */}
-          <div className="overflow-x-auto">
-            <table className="table-auto w-full rounded shadow-lg">
-              <thead>
-                <tr>
-                  <th className="px-4 py-2">Department Name</th>
-                  <th className="px-4 py-2">Description</th>
-                  <th className="px-4 py-2">Manager</th>
-                  <th className="px-4 py-2">Employees</th>
-                  <th className="px-4 py-2">Actions</th>
-                </tr>
-              </thead>
-              <tbody>
-                {filteredProjects.length > 0 ? (
-                  filteredProjects.map((department, index) => (
-                    <tr key={department.id} className="border-t">
-                      <td className="px-4 py-2">{department.departmentname}</td>
-                      <td className="px-4 py-2">{department.departmentDes}</td>
-                      <td className="px-4 py-2">{department.manager}</td>
-                      <td className="px-4 py-2 text-center">
-                        {department.employeeNumber}
-                      </td>
-                      <td className="px-4 py-2 text-center">
-                        <button className="text-blue-600 hover:underline">
-                          Edit
-                        </button>{" "}
-                        |{" "}
-                        <button className="text-red-600 hover:underline">
-                          Delete
-                        </button>
-                      </td>
-                    </tr>
-                  ))
-                ) : (
-                  <tr>
-                    <td colSpan="6" className="text-center text-gray-500 py-4">
-                      No departments found.
+          <table className="table-auto w-full border-collapse border border-gray-200">
+            <thead>
+              <tr>
+                <th className="text-center border border-gray-300 px-4 py-2">
+                  Department Name
+                </th>
+                <th className="text-center border border-gray-300 px-4 py-2">
+                  Description
+                </th>
+                <th className="text-center border border-gray-300 px-4 py-2">
+                  Manager
+                </th>
+                <th className="text-center border border-gray-300 px-4 py-2">
+                  Employee Number
+                </th>
+                <th className="text-center border border-gray-300 px-4 py-2">
+                  Action
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              {filteredProjects.length > 0 ? (
+                filteredProjects.map((item, idx) => (
+                  <tr key={idx}>
+                    <td className="text-center border border-gray-300 px-4 py-2">
+                      {item.departmentname}
+                    </td>
+                    <td className="text-center border border-gray-300 px-4 py-2">
+                      {item.departmentDes}
+                    </td>
+                    <td className="text-center border border-gray-300 px-4 py-2">
+                      {item.manager}
+                    </td>
+                    <td className="text-center border border-gray-300 px-4 py-2">
+                      {item.employeeNumber}
+                    </td>
+                    <td className="text-center border border-gray-300 px-4 py-2">
+                      <Button
+                        className="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-md"
+                        onClick={() => {
+                          deleteDepartment(item._id).then(() => {
+                            window.location.reload();
+                          });
+                        }}
+                      >
+                        Delete
+                      </Button>
                     </td>
                   </tr>
-                )}
-              </tbody>
-            </table>
-          </div>
+                ))
+              ) : (
+                <tr>
+                  <td colSpan="3" className="text-center text-gray-500 py-4">
+                    No projects found.
+                  </td>
+                </tr>
+              )}
+            </tbody>
+          </table>
         </div>
       </div>
     </div>

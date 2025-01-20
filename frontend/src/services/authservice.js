@@ -210,7 +210,16 @@ export const deleteProject = async (id) => {
 
 export const addDepartment = async (data) => {
   try {
-    const response = await axios.post(`/addDepartment`);
+    const response = await axios.post("/addDepartment", data);
+    return response.data;
+  } catch (error) {
+    console.error(error.response?.data || error.message);
+    throw error;
+  }
+};
+export const viewAllDepartment = async () => {
+  try {
+    const response = await axios.get(`/viewAllDepartment`);
     console.log(response.data);
     return response.data;
   } catch (error) {
@@ -218,10 +227,9 @@ export const addDepartment = async (data) => {
     throw error;
   }
 };
-
-export const viewAllDepartment = async () => {
+export const deleteDepartment = async (id) => {
   try {
-    const response = await axios.get(`/viewAllDepartment`);
+    const response = await axios.delete(`/deleteDepartment/${id}`);
     console.log(response.data);
     return response.data;
   } catch (error) {
