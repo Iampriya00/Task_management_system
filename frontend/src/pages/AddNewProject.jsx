@@ -113,7 +113,7 @@ function AddNewProject() {
                 <CiSearch className="text-gray-500 text-xl cursor-pointer" />
               </div>
             </div>
-            <div className="mt-5">
+            <div className="mt-5 max-lg:h-[350px]">
               <table className="table-auto w-full border-collapse border border-gray-200">
                 <thead>
                   <tr>

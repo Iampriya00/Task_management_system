@@ -184,65 +184,68 @@ function Department() {
           </form>
 
           {/* Departments Table */}
-          <table className="table-auto w-full border-collapse border border-gray-200">
-            <thead>
-              <tr>
-                <th className="text-center border border-gray-300 px-4 py-2">
-                  Department Name
-                </th>
-                <th className="text-center border border-gray-300 px-4 py-2">
-                  Description
-                </th>
-                <th className="text-center border border-gray-300 px-4 py-2">
-                  Manager
-                </th>
-                <th className="text-center border border-gray-300 px-4 py-2">
-                  Employee Number
-                </th>
-                <th className="text-center border border-gray-300 px-4 py-2">
-                  Action
-                </th>
-              </tr>
-            </thead>
-            <tbody>
-              {filteredProjects.length > 0 ? (
-                filteredProjects.map((item, idx) => (
-                  <tr key={idx}>
-                    <td className="text-center border border-gray-300 px-4 py-2">
-                      {item.departmentname}
-                    </td>
-                    <td className="text-center border border-gray-300 px-4 py-2">
-                      {item.departmentDes}
-                    </td>
-                    <td className="text-center border border-gray-300 px-4 py-2">
-                      {item.manager}
-                    </td>
-                    <td className="text-center border border-gray-300 px-4 py-2">
-                      {item.employeeNumber}
-                    </td>
-                    <td className="text-center border border-gray-300 px-4 py-2">
-                      <Button
-                        className="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-md"
-                        onClick={() => {
-                          deleteDepartment(item._id).then(() => {
-                            window.location.reload();
-                          });
-                        }}
-                      >
-                        Delete
-                      </Button>
+          <div>
+            {" "}
+            <table className="table-auto w-full border-collapse border border-gray-200">
+              <thead>
+                <tr>
+                  <th className="text-center border border-gray-300 px-4 py-2">
+                    Department Name
+                  </th>
+                  <th className="text-center border border-gray-300 px-4 py-2">
+                    Description
+                  </th>
+                  <th className="text-center border border-gray-300 px-4 py-2">
+                    Manager
+                  </th>
+                  <th className="text-center border border-gray-300 px-4 py-2">
+                    Employee Number
+                  </th>
+                  <th className="text-center border border-gray-300 px-4 py-2">
+                    Action
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                {filteredProjects.length > 0 ? (
+                  filteredProjects.map((item, idx) => (
+                    <tr key={idx}>
+                      <td className="text-center border border-gray-300 px-4 py-2">
+                        {item.departmentname}
+                      </td>
+                      <td className="text-center border border-gray-300 px-4 py-2">
+                        {item.departmentDes}
+                      </td>
+                      <td className="text-center border border-gray-300 px-4 py-2">
+                        {item.manager}
+                      </td>
+                      <td className="text-center border border-gray-300 px-4 py-2">
+                        {item.employeeNumber}
+                      </td>
+                      <td className="text-center border border-gray-300 px-4 py-2">
+                        <Button
+                          className="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-md"
+                          onClick={() => {
+                            deleteDepartment(item._id).then(() => {
+                              window.location.reload();
+                            });
+                          }}
+                        >
+                          Delete
+                        </Button>
+                      </td>
+                    </tr>
+                  ))
+                ) : (
+                  <tr>
+                    <td colSpan="3" className="text-center text-gray-500 py-4">
+                      No projects found.
                     </td>
                   </tr>
-                ))
-              ) : (
-                <tr>
-                  <td colSpan="3" className="text-center text-gray-500 py-4">
-                    No projects found.
-                  </td>
-                </tr>
-              )}
-            </tbody>
-          </table>
+                )}
+              </tbody>
+            </table>
+          </div>
         </div>
       </div>
     </div>

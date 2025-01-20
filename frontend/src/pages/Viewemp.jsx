@@ -35,7 +35,7 @@ function Viewemp() {
                   <p className="text-gray-400">{employee?.jobtitle}</p>
                 </div>
               </div>
-              <div className="text-slate-950">
+              <div className="text-slate-50">
                 <Link to={`/adminuseredit/${id}`}>
                   <FaEdit />
                 </Link>
@@ -69,7 +69,7 @@ function Viewemp() {
                 </p>
               </div>
             </div>
-            <div className="overflow-scroll h-[390px]">
+            <div className="overflow-auto h-[390px]">
               <table className="min-w-full table-auto border-collapse border border-gray-300">
                 <thead className="bg-gray-100 text-slate-700">
                   <tr>
