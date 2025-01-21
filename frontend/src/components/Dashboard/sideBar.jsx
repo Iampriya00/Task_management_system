@@ -24,7 +24,7 @@ function SideBar() {
         className="absolute top-8 left-8 cursor-pointer z-50 max-md:block hidden"
         onClick={toggleSidebar}
       >
-        <FaBars className="text-slate-500 text-2xl" />
+        <FaBars className="text-slate-200 text-2xl" />
       </div>
 
       {/* Sidebar */}

@@ -67,7 +67,7 @@ function LeaveManagement() {
   return (
     <div className="flex min-h-screen">
       <SideBar />
-      <div className="w-3/4 max-md:w-full flex-1 p-6 max-md:p-20">
+      <div className="w-3/4 max-md:w-full flex-1 p-6 max-md:p-15">
         <div className="mx-auto">
           <h1 className="text-2xl font-semibold mb-4 text-gray-300">
             Leave Management
