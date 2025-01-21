@@ -43,16 +43,16 @@ function UserDashboard() {
             </Avatar>
           </div>
           <div className="text-center">
-            <p className="text-lg font-medium text-gray-700">
+            <p className="text-lg font-medium text-slate-400">
               ID: <span className="text-gray-500">{user._id}</span>
             </p>
-            <p className="text-lg font-medium text-gray-700">
+            <p className="text-lg font-medium text-slate-400">
               Username: <span className="text-gray-500">{user.username}</span>
             </p>
-            <p className="text-lg font-medium text-gray-700">
+            <p className="text-lg font-medium text-slate-400">
               Email: <span className="text-gray-500">{user.email}</span>
             </p>
-            <p className="text-lg font-medium text-gray-700">
+            <p className="text-lg font-medium text-slate-400">
               Phone: <span className="text-gray-500">{user.phone}</span>
             </p>
           </div>

@@ -52,7 +52,10 @@ function Login() {
     }
   }, [isLoggedIn, user, token, navigate]);
   return (
-    <div className="min-h-screen flex items-center justify-center">
+    <div
+      className="min-h-screen flex items-center justify-center bg-no-repeat bg-left"
+      style={{ backgroundImage: "url('bg-img.png')" }}
+    >
       <div className="container mx-auto px-4">
         <div className="flex justify-end">
           <ModeToggle />
