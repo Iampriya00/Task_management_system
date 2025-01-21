@@ -14,7 +14,7 @@ function ViewAttendence() {
   return (
     <div className="flex h-screen">
       <SideBar />
-      <div className="w-full md:w-3/4 flex flex-col h-screen overflow-hidden">
+      <div className="w-3/4 flex flex-col h-screen overflow-hidden max-md:w-full">
         <div className="container mx-auto px-4 py-8">
           <h1 className="text-3xl font-bold text-center mb-8 text-gray-700">
             Timing of Employee

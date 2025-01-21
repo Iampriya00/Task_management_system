@@ -58,7 +58,7 @@ function AddNewProject() {
     <div>
       <div className="flex">
         <SideBar />
-        <div className="w-3/4 flex flex-col h-screen">
+        <div className="w-3/4 flex flex-col h-screen max-md:w-full">
           <div className="container p-20">
             <h1 className="text-2xl mb-6 text-center font-semibold">
               Add New Project
@@ -113,7 +113,7 @@ function AddNewProject() {
                 <CiSearch className="text-gray-500 text-xl cursor-pointer" />
               </div>
             </div>
-            <div className="mt-5 max-lg:h-[350px]">
+            <div className="mt-5 max-lg :h-[350px]">
               <table className="table-auto w-full border-collapse border border-gray-200">
                 <thead>
                   <tr>

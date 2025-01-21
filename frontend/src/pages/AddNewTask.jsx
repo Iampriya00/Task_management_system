@@ -61,7 +61,7 @@ function AddNewTask() {
   return (
     <div className="flex">
       <SideBar />
-      <div className="w-3/4 flex h-screen">
+      <div className="w-3/4 flex h-screen max-md:w-full">
         <div className="container p-20">
           <h1 className="text-2xl mb-6 text-center font-semibold">
             Add Task Details

@@ -55,7 +55,7 @@ function Leaves() {
   return (
     <div className="flex min-h-screen">
       <SideBar />
-      <div className="w-3/4 flex-1 p-6 md:p-10">
+      <div className="w-3/4 max-md:w-full flex-1 p-20 md:p-10">
         <div className="max-w-lg mx-auto">
           <h1 className="text-2xl text-center font-semibold mb-4 text-gray-700">
             View All Leaves

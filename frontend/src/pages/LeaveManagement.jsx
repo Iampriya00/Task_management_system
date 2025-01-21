@@ -67,15 +67,15 @@ function LeaveManagement() {
   return (
     <div className="flex min-h-screen">
       <SideBar />
-      <div className="w-3/4 flex-1 p-6 md:p-10">
+      <div className="w-3/4 max-md:w-full flex-1 p-6 max-md:p-20">
         <div className="mx-auto">
-          <h1 className="text-2xl font-semibold mb-4 text-gray-700">
+          <h1 className="text-2xl font-semibold mb-4 text-gray-300">
             Leave Management
           </h1>
           <form onSubmit={handleSubmit(handleApplyLeave)}>
             <div className="flex flex-wrap -mx-3 mb-6">
               <div className="w-full px-3">
-                <label className="block text-sm font-medium text-gray-700">
+                <label className="block text-sm font-medium text-gray-400">
                   Leave Type
                 </label>
                 <select
@@ -105,7 +105,7 @@ function LeaveManagement() {
             {/* Start Date */}
             <div className="flex flex-wrap -mx-3 mb-6">
               <div className="w-full px-3">
-                <label className="block text-sm font-medium text-gray-700">
+                <label className="block text-sm font-medium text-slate-400">
                   Start Date
                 </label>
                 <input
@@ -128,7 +128,7 @@ function LeaveManagement() {
             {/* End Date */}
             <div className="flex flex-wrap -mx-3 mb-6">
               <div className="w-full px-3">
-                <label className="block text-sm font-medium text-gray-700">
+                <label className="block text-sm font-medium text-slate-400">
                   End Date
                 </label>
                 <input
@@ -151,7 +151,7 @@ function LeaveManagement() {
             {/* Reason for Leave */}
             <div className="flex flex-wrap -mx-3 mb-6">
               <div className="w-full px-3">
-                <label className="block text-sm font-medium text-gray-700">
+                <label className="block text-sm font-medium text-slate-400">
                   Reason for Leave
                 </label>
                 <textarea

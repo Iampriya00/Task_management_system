@@ -52,7 +52,7 @@ function Login() {
     }
   }, [isLoggedIn, user, token, navigate]);
   return (
-    <div className="min-h-screen flex items-center justify-center bg-background">
+    <div className="min-h-screen flex items-center justify-center">
       <div className="container mx-auto px-4">
         <div className="flex justify-end">
           <ModeToggle />

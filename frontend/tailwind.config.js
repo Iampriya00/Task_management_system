@@ -4,7 +4,8 @@ export default {
   content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
   theme: {
     screens: {
-      "max-md": { max: "650px" },
+      "max-md": { max: "766px" },
+      "min-md": { min: "767px" },
       "max-lg": { max: "1024px" },
     },
     extend: {

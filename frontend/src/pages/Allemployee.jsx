@@ -35,7 +35,7 @@ function AllEmployee() {
   return (
     <div className="flex">
       <SideBar />
-      <div className="w-3/4 flex h-screen overflow-y-auto">
+      <div className="w-3/4 flex h-screen overflow-y-auto max-md:w-full">
         <div className="container mx-auto px-4 py-8">
           <h1 className="text-3xl font-bold text-center mb-8 text-gray-400">
             Employee List

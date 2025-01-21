@@ -71,7 +71,7 @@ function AddNewEmp() {
   return (
     <div className="flex min-h-screen bg-gray-100">
       <SideBar />
-      <div className="w-3/4 flex-1 p-6 md:p-10 bg-black">
+      <div className="w-3/4 flex-1 p-6 md:p-10 bg-black max-md:w-full">
         <div className="max-w-lg mx-auto p-4">
           <h1 className="text-2xl font-semibold mb-4">Add New Employee</h1>
           <form className="space-y-4" onSubmit={handleSubmit(handleAddEmp)}>

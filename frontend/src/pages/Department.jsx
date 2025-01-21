@@ -80,7 +80,7 @@ function Department() {
   return (
     <div className="flex min-h-screen">
       <SideBar />
-      <div className="w-full flex-1 p-6">
+      <div className="w-3/4 max-md:w-full flex-1 p-6">
         <div className="max-w-6xl mx-auto p-6 rounded-lg shadow-lg">
           <h1 className="text-2xl font-bold text-center mb-6 text-gray-700">
             Manage Departments

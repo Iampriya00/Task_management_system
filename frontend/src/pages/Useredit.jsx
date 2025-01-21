@@ -62,7 +62,7 @@ function UserEdit() {
   return (
     <div className="flex">
       <SideBar />
-      <div className="w-3/4 flex items-center justify-center h-screen">
+      <div className="w-3/4 flex items-center justify-center h-screen max-md:w-full">
         <div className="container p-20 ">
           <h1 className="text-2xl mb-6 text-center font-semibold">
             Use Your Information

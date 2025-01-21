@@ -43,117 +43,115 @@ function EmpViewTask() {
   return (
     <div className="flex min-h-screen">
       <SideBar />
-      <div className="w-3/4 flex-1 p-6 md:p-10">
-        <div className="max-w-4xl mx-auto rounded-lg p-6">
-          <h1 className="text-3xl font-semibold text-center mb-6 text-gray-800">
-            Task Details
-          </h1>
+      <div className="w-3/4 max-md:w-full flex-1 p-10">
+        <h1 className="text-3xl font-semibold text-center mb-6 text-gray-300">
+          Task Details
+        </h1>
 
-          <div className="overflow-auto h-[700px]">
-            <table className="min-w-full table-auto border-collapse border">
-              <thead className=" text-slate-700">
-                <tr>
-                  <th
-                    scope="col"
-                    className="px-4 py-2 border-b text-left font-medium"
+        <div className="overflow-auto h-[700px]">
+          <table className="min-w-full table-auto border-collapse border">
+            <thead className=" text-slate-400">
+              <tr>
+                <th
+                  scope="col"
+                  className="px-4 py-2 border-b text-left font-medium"
+                >
+                  Task Details
+                </th>
+                <th
+                  scope="col"
+                  className="px-4 py-2 border-b text-left font-medium"
+                >
+                  Project
+                </th>
+                <th
+                  scope="col"
+                  className="px-4 py-2 border-b text-left font-medium"
+                >
+                  Create Date
+                </th>
+                <th
+                  scope="col"
+                  className="px-4 py-2 border-b text-left font-medium"
+                >
+                  Due Date
+                </th>
+                <th
+                  scope="col"
+                  className="px-4 py-2 border-b text-left font-medium"
+                >
+                  Assign To
+                </th>
+                <th
+                  scope="col"
+                  className="px-4 py-2 border-b text-left font-medium"
+                >
+                  Assign By
+                </th>
+                <th
+                  scope="col"
+                  className="px-4 py-2 border-b text-left font-medium"
+                >
+                  Status
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              {task?.tasks && task.tasks.length > 0 ? (
+                task.tasks.map((taskItem) => (
+                  <tr
+                    key={taskItem._id}
+                    className="hover:bg-gray-50 text-slate-400"
                   >
-                    Task Details
-                  </th>
-                  <th
-                    scope="col"
-                    className="px-4 py-2 border-b text-left font-medium"
-                  >
-                    Project
-                  </th>
-                  <th
-                    scope="col"
-                    className="px-4 py-2 border-b text-left font-medium"
-                  >
-                    Create Date
-                  </th>
-                  <th
-                    scope="col"
-                    className="px-4 py-2 border-b text-left font-medium"
-                  >
-                    Due Date
-                  </th>
-                  <th
-                    scope="col"
-                    className="px-4 py-2 border-b text-left font-medium"
-                  >
-                    Assign To
-                  </th>
-                  <th
-                    scope="col"
-                    className="px-4 py-2 border-b text-left font-medium"
-                  >
-                    Assign By
-                  </th>
-                  <th
-                    scope="col"
-                    className="px-4 py-2 border-b text-left font-medium"
-                  >
-                    Status
-                  </th>
-                </tr>
-              </thead>
-              <tbody>
-                {task?.tasks && task.tasks.length > 0 ? (
-                  task.tasks.map((taskItem) => (
-                    <tr
-                      key={taskItem._id}
-                      className="hover:bg-gray-50 text-slate-600"
-                    >
-                      <td className="px-4 py-2 border-b">
-                        {taskItem.taskdetails || "N/A"}
-                      </td>
-                      <td className="px-4 py-2 border-b">
-                        {taskItem.project || "N/A"}
-                      </td>
-                      <td className="px-4 py-2 border-b">
-                        {taskItem?.datecreate
-                          ? new Date(taskItem.datecreate).toLocaleDateString()
-                          : "N/A"}
-                      </td>
-                      <td className="px-4 py-2 border-b">
-                        {taskItem?.datedue
-                          ? new Date(taskItem.datedue).toLocaleDateString()
-                          : "N/A"}
-                      </td>
-                      <td className="px-4 py-2 border-b">
-                        {taskItem?.assignto || "N/A"}
-                      </td>
-                      <td className="px-4 py-2 border-b">
-                        {taskItem?.assignby || "N/A"}
-                      </td>
+                    <td className="px-4 py-2 border-b">
+                      {taskItem.taskdetails || "N/A"}
+                    </td>
+                    <td className="px-4 py-2 border-b">
+                      {taskItem.project || "N/A"}
+                    </td>
+                    <td className="px-4 py-2 border-b">
+                      {taskItem?.datecreate
+                        ? new Date(taskItem.datecreate).toLocaleDateString()
+                        : "N/A"}
+                    </td>
+                    <td className="px-4 py-2 border-b">
+                      {taskItem?.datedue
+                        ? new Date(taskItem.datedue).toLocaleDateString()
+                        : "N/A"}
+                    </td>
+                    <td className="px-4 py-2 border-b">
+                      {taskItem?.assignto || "N/A"}
+                    </td>
+                    <td className="px-4 py-2 border-b">
+                      {taskItem?.assignby || "N/A"}
+                    </td>
 
-                      <td className="px-4 py-2 border-b">
-                        <select
-                          className="form-select"
-                          disabled={taskItem?.status === "done"}
-                          value={taskItem?.status}
-                          onChange={(e) => handleStatusChange(e, taskItem._id)}
-                        >
-                          <option value="pending">Pending</option>
-                          <option value="working">Working</option>
-                          <option value="done">Done</option>
-                        </select>
-                      </td>
-                    </tr>
-                  ))
-                ) : (
-                  <tr>
-                    <td
-                      colSpan="6"
-                      className="px-4 py-6 text-center text-red-700"
-                    >
-                      No tasks available
+                    <td className="px-4 py-2 border-b">
+                      <select
+                        className="form-select"
+                        disabled={taskItem?.status === "done"}
+                        value={taskItem?.status}
+                        onChange={(e) => handleStatusChange(e, taskItem._id)}
+                      >
+                        <option value="pending">Pending</option>
+                        <option value="working">Working</option>
+                        <option value="done">Done</option>
+                      </select>
                     </td>
                   </tr>
-                )}
-              </tbody>
-            </table>
-          </div>
+                ))
+              ) : (
+                <tr>
+                  <td
+                    colSpan="6"
+                    className="px-4 py-6 text-center text-red-700"
+                  >
+                    No tasks available
+                  </td>
+                </tr>
+              )}
+            </tbody>
+          </table>
         </div>
       </div>
     </div>

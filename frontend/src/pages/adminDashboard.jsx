@@ -2,15 +2,16 @@ import React from "react";
 import SideBar from "@/components/Dashboard/sideBar";
 import { useAppSelector } from "@/store/hooks";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { FaBars } from "react-icons/fa";
 
 function AdminDashboard() {
   const user = useAppSelector((state) => state.user.user);
 
   return (
-    <div className="flex">
+    <div className="flex ">
       <SideBar />
-      <div className="w-3/4 flex h-screen">
-        <div className="container p-20 ">
+      <div className="min-md:w-3/4 flex h-screen max-md:w-full">
+        <div className="p-20 w-full ">
           <h1 className="text-2xl mb-6 text-center font-semibold">
             Use Your Information
           </h1>
