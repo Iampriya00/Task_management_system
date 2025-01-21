@@ -16,7 +16,7 @@ function Viewemp() {
       <div className="flex min-h-screen">
         <SideBar />
         <div className="w-3/4 flex-1 p-6 max-md:w-full">
-          <div className="max-w-4xl mx-auto shadow-lg rounded-lg p-6">
+          <div className="max-w-6xl mx-auto shadow-lg rounded-lg p-6">
             <h1 className="text-3xl font-semibold text-center mb-6 text-gray-400">
               Employee Information
             </h1>

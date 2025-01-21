@@ -7,6 +7,7 @@ export default {
       "max-md": { max: "766px" },
       "min-md": { min: "767px" },
       "max-lg": { max: "1024px" },
+      "min-lg": { min: "1400px" },
     },
     extend: {
       borderRadius: {
