@@ -7,7 +7,7 @@ import AuthWrapper from "./utils/authWrapper";
 import UserEdit from "./pages/Useredit";
 import AllEmployee from "./pages/Allemployee";
 import AddNewEmp from "./pages/AddNewEmp";
-import Viewemp from "./pages/Viewemp";
+import ViewEmp from "./pages/Viewemp";
 import AddNewTask from "./pages/AddNewTask";
 import EmpViewTask from "./pages/EmpViewTask";
 import ViewAttendence from "./pages/ViewAttendence";
@@ -67,7 +67,7 @@ function App() {
           path="/viewemplyoee/:id"
           element={
             <AuthWrapper requiredRole={["admin"]}>
-              <Viewemp />
+              <ViewEmp />
             </AuthWrapper>
           }
         />

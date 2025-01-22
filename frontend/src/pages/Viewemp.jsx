@@ -6,7 +6,7 @@ import { FaEdit } from "react-icons/fa";
 import { useQuery } from "react-query";
 import { Link, useParams } from "react-router-dom";
 
-function Viewemp() {
+function ViewEmp() {
   const { id } = useParams();
   const { data: employee } = useQuery(`empDetails/${id}`, () => empDetails(id));
   const { data: task } = useQuery(`viewTask/${id}`, () => viewTask(id));
@@ -123,4 +123,4 @@ function Viewemp() {
   );
 }
 
-export default Viewemp;
+export default ViewEmp;

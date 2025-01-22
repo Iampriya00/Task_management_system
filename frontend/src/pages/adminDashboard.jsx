@@ -2,7 +2,6 @@ import React from "react";
 import SideBar from "@/components/Dashboard/sideBar";
 import { useAppSelector } from "@/store/hooks";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { FaBars } from "react-icons/fa";
 
 function AdminDashboard() {
   const user = useAppSelector((state) => state.user.user);
