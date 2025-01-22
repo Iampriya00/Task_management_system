@@ -1,5 +1,5 @@
 import React from "react";
-import SideBar from "@/components/Dashboard/sideBar";
+import SideBar from "@/components/dashboard/sideBar";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { useQuery } from "react-query";
 import { attendance, clockIn, clockOut } from "@/services/authservice";

@@ -1,4 +1,4 @@
-import SideBar from "@/components/Dashboard/sideBar";
+import SideBar from "@/components/dashboard/sideBar";
 import { Input } from "@/components/ui/input";
 import { zodResolver } from "@hookform/resolvers/zod";
 import React from "react";

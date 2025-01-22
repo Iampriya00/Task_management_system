@@ -1,4 +1,4 @@
-import SideBar from "@/components/Dashboard/sideBar";
+import SideBar from "@/components/dashboard/sideBar";
 import { Button } from "@/components/ui/button";
 import { deleteEmp, fetchAllEmp } from "@/services/authservice";
 import React from "react";

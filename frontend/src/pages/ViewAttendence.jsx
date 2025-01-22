@@ -1,4 +1,4 @@
-import SideBar from "@/components/Dashboard/sideBar";
+import SideBar from "@/components/dashboard/sideBar";
 import { adminViewAttendence } from "@/services/authservice";
 import React from "react";
 import { useQuery } from "react-query";

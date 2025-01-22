@@ -1,5 +1,5 @@
 import React from "react";
-import SideBar from "@/components/Dashboard/sideBar";
+import SideBar from "@/components/dashboard/sideBar";
 import { useQuery } from "react-query";
 import { leaveStatus, viewAllLeave } from "@/services/authservice";
 import { toast } from "sonner";

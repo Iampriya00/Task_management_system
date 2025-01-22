@@ -1,4 +1,4 @@
-import SideBar from "@/components/Dashboard/sideBar";
+import SideBar from "@/components/dashboard/sideBar";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import React, { useCallback, useEffect } from "react";

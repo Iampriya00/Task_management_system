@@ -1,4 +1,4 @@
-import SideBar from "@/components/Dashboard/sideBar";
+import SideBar from "@/components/dashboard/sideBar";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { addProject, deleteProject, viewProject } from "@/services/authservice";

@@ -8,7 +8,7 @@ import { useNavigate } from "react-router-dom";
 import { toast } from "sonner";
 import { z } from "zod";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
-import SideBar from "@/components/Dashboard/sideBar";
+import SideBar from "@/components/dashboard/sideBar";
 
 function AddNewEmp() {
   const [showPassword, setShowPassword] = useState(false);

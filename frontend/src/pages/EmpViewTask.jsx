@@ -1,4 +1,4 @@
-import SideBar from "@/components/Dashboard/sideBar";
+import SideBar from "@/components/dashboard/sideBar";
 import { updateStatus, viewTask } from "@/services/authservice";
 import { useAppSelector } from "@/store/hooks";
 import queryClient from "@/utils/react-query";
