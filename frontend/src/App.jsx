@@ -16,6 +16,8 @@ import Leaves from "./pages/Leaves";
 import AdminUserEdit from "./pages/AdminUserEdit";
 import AddNewProject from "./pages/AddNewProject";
 import Department from "./pages/Department";
+import UpdateProject from "./pages/UpdateProject";
+import UpdateDepartment from "./pages/UpdateDepartment";
 
 function App() {
   return (
@@ -132,6 +134,22 @@ function App() {
           element={
             <AuthWrapper requiredRole={["admin"]}>
               <Department />
+            </AuthWrapper>
+          }
+        />
+        <Route
+          path="/updateproject/:id"
+          element={
+            <AuthWrapper requiredRole={["admin"]}>
+              <UpdateProject />
+            </AuthWrapper>
+          }
+        />
+        <Route
+          path="/updateDepartment/:id"
+          element={
+            <AuthWrapper requiredRole={["admin"]}>
+              <UpdateDepartment />
             </AuthWrapper>
           }
         />

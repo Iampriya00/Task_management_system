@@ -35,6 +35,61 @@ router.get("/viewAllProject", authenticateToken, async (req, res) => {
   }
 });
 
+router.post("/updateProject/:id", authenticateToken, async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { projectname, projectdescription } = req.body;
+
+    if (!id) {
+      return res.status(400).json({ message: "Project ID is required" });
+    }
+
+    if (!projectname || !projectdescription) {
+      return res
+        .status(400)
+        .json({ message: "Project name and description are required" });
+    }
+
+    const updatedProject = await Project.findByIdAndUpdate(
+      id,
+      { projectname, projectdescription },
+      { new: true }
+    );
+
+    if (!updatedProject) {
+      return res.status(404).json({ message: "Project not found" });
+    }
+
+    return res.status(200).json(updatedProject);
+  } catch (error) {
+    console.error("Error updating project:", error.message || error);
+    return res.status(500).json({
+      message: "Internal Server Error",
+      error: error.message || error,
+    });
+  }
+});
+
+router.get("/viewProject/:id", async (req, res) => {
+  try {
+    const { id } = req.params;
+
+    if (!id) {
+      return res.status(400).json({ message: "Project ID is required" });
+    }
+
+    const project = await Project.findById(id);
+    if (!project) {
+      return res.status(404).json({ error: "Project not found" });
+    }
+
+    res.status(200).json(project);
+  } catch (error) {
+    console.error("Error fetching project:", error);
+    res.status(500).json({ error: "Server error" });
+  }
+});
+
 router.delete("/deleteProject/:id", authenticateToken, async (req, res) => {
   try {
     const { id } = req.params;

@@ -9,6 +9,7 @@ import { useMutation, useQuery } from "react-query";
 import { toast } from "sonner";
 import { z } from "zod";
 import { CiSearch } from "react-icons/ci";
+import { Link } from "react-router-dom";
 
 function AddNewProject() {
   const [searchTerm, setSearchTerm] = useState("");
@@ -154,6 +155,9 @@ function AddNewProject() {
                             }}
                           >
                             Delete
+                          </Button>
+                          <Button className="bg-indigo-500 hover:bg-indigo-900 mt-6">
+                            <Link to={`/updateproject/${item._id}`}>Edit</Link>
                           </Button>
                         </td>
                       </tr>

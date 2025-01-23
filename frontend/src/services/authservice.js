@@ -197,6 +197,31 @@ export const viewProject = async () => {
   }
 };
 
+export const updateProject = async (id, data) => {
+  try {
+    const response = await axios.post(`/updateProject/${id}`, data);
+    console.log(response.data);
+    return response.data;
+  } catch (error) {
+    console.error(error.response?.data || error.message);
+    throw error;
+  }
+};
+
+export const viewSinProject = async (id) => {
+  try {
+    const response = await axios.get(`/viewProject/${id}`); // Ensure this matches your API endpoint
+    console.log("API Response:", response.data); // Debug API response
+    return response.data;
+  } catch (error) {
+    console.error(
+      "Failed to fetch project data:",
+      error.response?.data || error.message
+    );
+    throw error;
+  }
+};
+
 export const deleteProject = async (id) => {
   try {
     const response = await axios.delete(`/deleteProject/${id}`);
@@ -234,6 +259,31 @@ export const deleteDepartment = async (id) => {
     return response.data;
   } catch (error) {
     console.error(error.response?.data || error.message);
+    throw error;
+  }
+};
+
+export const updatedept = async (id, data) => {
+  try {
+    const response = await axios.post(`/updatedept/${id}`, data);
+    console.log(response.data);
+    return response.data;
+  } catch (error) {
+    console.error(error.response?.data || error.message);
+    throw error;
+  }
+};
+
+export const viewDept = async (id) => {
+  try {
+    const response = await axios.get(`/viewDept/${id}`);
+    console.log("API Response:", response.data);
+    return response.data;
+  } catch (error) {
+    console.error(
+      "Failed to fetch project data:",
+      error.response?.data || error.message
+    );
     throw error;
   }
 };

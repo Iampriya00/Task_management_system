@@ -9,6 +9,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useMutation, useQuery } from "react-query";
+import { Link } from "react-router-dom";
 import { toast } from "sonner";
 import { z } from "zod";
 
@@ -232,6 +233,9 @@ function Department() {
                           }}
                         >
                           Delete
+                        </Button>
+                        <Button className="bg-indigo-500 hover:bg-indigo-900 mt-6">
+                          <Link to={`/updateDepartment/${item._id}`}>Edit</Link>
                         </Button>
                       </td>
                     </tr>

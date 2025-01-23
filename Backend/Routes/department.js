@@ -46,6 +46,55 @@ router.get("/viewAllDepartment", authenticateToken, async (req, res) => {
   }
 });
 
+router.get("/viewDept/:id", authenticateToken, async (req, res) => {
+  try {
+    const { id } = req.params;
+    if (!id) {
+      return res.status(400).json({ message: "Department ID is required" });
+    }
+    const department = await Department.findById(id);
+    if (!department) {
+      return res.status(404).json({ message: "Department not found" });
+    }
+    return res.status(200).json(department);
+  } catch (error) {
+    console.error("Error fetching project:", error);
+    res.status(500).json({ error: "Server error" });
+  }
+});
+
+router.post("/updatedept/:id", authenticateToken, async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { departmentname, departmentDes, manager, employeeNumber } = req.body;
+    if (!departmentname || !departmentDes || !manager || !employeeNumber) {
+      return res.status(400).json({ message: "All fields are required" });
+    }
+    if (!id) {
+      return res.status(400).json({ message: "Department ID is required" });
+    }
+    const updatedDepartment = await Department.findByIdAndUpdate(
+      id,
+      {
+        departmentname,
+        departmentDes,
+        manager,
+        employeeNumber,
+      },
+      {
+        new: true,
+      }
+    );
+    if (!updatedDepartment) {
+      return res.status(404).json({ message: "Department not found" });
+    }
+    return res.status(200).json(updatedDepartment);
+  } catch (error) {
+    console.error("Error fetching project:", error);
+    res.status(500).json({ error: "Server error" });
+  }
+});
+
 // Route to delete a department by ID
 router.delete("/deleteDepartment/:id", authenticateToken, async (req, res) => {
   try {
