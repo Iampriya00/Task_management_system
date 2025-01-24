@@ -5,12 +5,12 @@ require("dotenv").config();
 require("./connection/connection");
 
 // Import routes
-const user = require("./Routes/user");
-const task = require("./Routes/task");
-const clock = require("./Routes/clock");
-const leave = require("./Routes/leave");
-const project = require("./Routes/project");
-const department = require("./Routes/department");
+const user = require("./routes/user");
+const task = require("./routes/task");
+const clock = require("./routes/clock");
+const leave = require("./routes/leave");
+const project = require("./routes/project");
+const department = require("./routes/department");
 
 // Middleware
 app.use(cors());
@@ -34,7 +34,6 @@ app.use((err, req, res, next) => {
 app.get("/", (req, res) => {
   res.send("Hello baby");
 });
-
 
 const PORT = process.env.PORT || 3000;
 const baseUrl = process.env.BASE_URL;
