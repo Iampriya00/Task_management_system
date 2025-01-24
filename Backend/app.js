@@ -36,10 +36,9 @@ app.get("/", (req, res) => {
 });
 
 const PORT = process.env.PORT || 3000;
-const baseUrl = process.env.BASE_URL;
 app
   .listen(PORT, () => {
-    console.log(`🚀 Server is running on: ${baseUrl}`);
+    console.log(`🚀 Server is running on: ${PORT}`);
   })
   .on("error", (err) => {
     console.error("Error starting the server", err);
