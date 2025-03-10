@@ -5,12 +5,12 @@ require("dotenv").config();
 require("./connection/connection");
 
 // Import routes
-const user = require("./routes/user");
-const task = require("./routes/task");
-const clock = require("./routes/clock");
-const leave = require("./routes/leave");
-const project = require("./routes/project");
-const department = require("./routes/department");
+const user = require("./Routes/user");
+const task = require("./Routes/task");
+const clock = require("./Routes/clock");
+const leave = require("./Routes/leave");
+const project = require("./Routes/project");
+const department = require("./Routes/department");
 
 // Middleware
 app.use(cors());
