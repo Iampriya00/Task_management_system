@@ -2,7 +2,7 @@ import store from "../store";
 import _axios from "axios";
 import { handleLogout } from "./authservice";
 
-// Base URL for API
+// Base URL for APIs
 const baseURL = "https://task-management-system-cf9d.onrender.com/"; // You can set the API URL in environment variables
 
 // Create an axios instance
