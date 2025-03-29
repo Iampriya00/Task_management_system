@@ -29,7 +29,7 @@ function SideBar() {
 
       {/* Sidebar */}
       <div
-        className={`fixed min-md:w-1/4 top-0 left-0 h-screen bg-gradient-to-b from-blue-800 to-blue-600 shadow-lg transform ${
+        className={`fixed min-md:w-1/4 top-0 left-0 h-screen bg-gradient-to-b from-blue-800 to-blue-600 shadow-lg transform overflow-scroll ${
           isSidebarOpen ? "translate-x-0" : "-translate-x-full"
         } transition-transform duration-300 w-64 z-40 min-md:translate-x-0`}
       >
