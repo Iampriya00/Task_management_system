@@ -18,6 +18,7 @@ import AddNewProject from "./pages/AddNewProject";
 import Department from "./pages/Department";
 import UpdateProject from "./pages/UpdateProject";
 import UpdateDepartment from "./pages/UpdateDepartment";
+import './App.css'
 
 function App() {
   return (
