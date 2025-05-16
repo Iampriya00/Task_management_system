@@ -84,7 +84,7 @@ function LeaveManagement() {
                   className={`mt-1 block w-full p-2 border ${
                     errors.leavetype
                       ? "border-red-500"
-                      : "border-gray-300 text-slate-800 focus:ring-blue-500 focus:border-blue-500"
+                      : "border-gray-300 bg-black text-[#0EA5E9] focus:ring-blue-500 focus:border-blue-500"
                   } rounded-md shadow-sm sm:text-sm`}
                 >
                   <option value="" disabled>
@@ -114,7 +114,7 @@ function LeaveManagement() {
                   className={`mt-1 block w-full p-2 border${
                     errors.startDate
                       ? "border-red-500"
-                      : "border-gray-300 text-slate-800 focus:ring-blue-500 focus:border-blue-500"
+                      : "border-gray-300 bg-black text-[#0EA5E9] focus:ring-blue-500 focus:border-blue-500"
                   } rounded-md shadow-sm sm:text-sm`}
                 />
                 {errors.startDate && (
@@ -137,7 +137,7 @@ function LeaveManagement() {
                   className={`mt-1 block w-full p-2 border ${
                     errors.endDate
                       ? "border-red-500"
-                      : "border-gray-300 text-slate-800 focus:ring-blue-500 focus:border-blue-500"
+                      : "border-gray-300 bg-black text-[#0EA5E9] focus:ring-blue-500 focus:border-blue-500"
                   } rounded-md shadow-sm sm:text-sm`}
                 />
                 {errors.endDate && (
@@ -160,7 +160,7 @@ function LeaveManagement() {
                   className={`mt-1 block w-full p-2 border ${
                     errors.reason
                       ? "border-red-500"
-                      : "border-gray-300 text-slate-800 focus:ring-blue-500 focus:border-blue-500"
+                      : "border-gray-300 bg-black text-[#0EA5E9] focus:ring-blue-500 focus:border-blue-500"
                   } rounded-md shadow-sm sm:text-sm`}
                   placeholder="Briefly explain the reason for your leave"
                 ></textarea>
@@ -210,20 +210,20 @@ function LeaveManagement() {
               <tbody>
                 {leaveData && leaveData.length > 0 ? (
                   leaveData.map((leaveItem) => (
-                    <tr key={leaveItem._id} className="hover:bg-gray-50">
-                      <td className="px-6 py-4 text-gray-400 border-b border-gray-300 text-xs sm:text-sm">
+                    <tr key={leaveItem._id} className="hover:bg-gray-800">
+                      <td className="px-6 py-4 text-[#0EA5E9] border-b border-gray-300 text-xs sm:text-sm">
                         {leaveItem.leavetype}
                       </td>
-                      <td className="px-6 py-4 text-gray-400 border-b border-gray-300 text-xs sm:text-sm">
+                      <td className="px-6 py-4 text-[#0EA5E9] border-b border-gray-300 text-xs sm:text-sm">
                         {formatDate(leaveItem.startDate)}
                       </td>
-                      <td className="px-6 py-4 text-gray-400 border-b border-gray-300 text-xs sm:text-sm">
+                      <td className="px-6 py-4 text-[#0EA5E9] border-b border-gray-300 text-xs sm:text-sm">
                         {formatDate(leaveItem.endDate)}
                       </td>
-                      <td className="px-6 py-4 text-gray-400 border-b border-gray-300 text-xs sm:text-sm">
+                      <td className="px-6 py-4 text-[#0EA5E9] border-b border-gray-300 text-xs sm:text-sm">
                         {leaveItem.reason}
                       </td>
-                      <td className="px-6 py-4 text-gray-400 border-b border-gray-300 text-xs sm:text-sm">
+                      <td className="px-6 py-4 text-[#0EA5E9] border-b border-gray-300 text-xs sm:text-sm">
                         {leaveItem.status || "Pending"}
                       </td>
                     </tr>

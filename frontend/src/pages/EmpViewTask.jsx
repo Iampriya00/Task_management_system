@@ -101,7 +101,7 @@ function EmpViewTask() {
                 task.tasks.map((taskItem) => (
                   <tr
                     key={taskItem._id}
-                    className="hover:bg-gray-50 text-slate-400"
+                    className="hover:bg-gray-700 text-[#0EA5E9]"
                   >
                     <td className="px-4 py-2 border-b">
                       {taskItem.taskdetails || "N/A"}
@@ -128,7 +128,7 @@ function EmpViewTask() {
 
                     <td className="px-4 py-2 border-b">
                       <select
-                        className="form-select"
+                        className="form-select p-3 bg-black"
                         disabled={taskItem?.status === "done"}
                         value={taskItem?.status}
                         onChange={(e) => handleStatusChange(e, taskItem._id)}
