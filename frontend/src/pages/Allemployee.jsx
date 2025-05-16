@@ -77,7 +77,7 @@ function AllEmployee() {
                   empData.data.map((item, idx) => (
                     <tr
                       key={idx}
-                      className={`cursor-pointer hover:bg-gray-100`}
+                      className={`cursor-pointer hover:bg-gray-700`}
                       onClick={() => navigate(`/viewemplyoee/${item._id}`)}
                     >
                       <td className="px-6 text-gray-400 py-4 border-b border-gray-300">
