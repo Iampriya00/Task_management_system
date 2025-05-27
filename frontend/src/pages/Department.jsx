@@ -83,7 +83,7 @@ function Department() {
       <SideBar />
       <div className="w-3/4 max-md:w-full flex-1 p-6">
         <div className="max-w-6xl mx-auto p-6 rounded-lg shadow-lg">
-          <h1 className="text-2xl font-bold text-center mb-6 text-gray-700">
+          <h1 className="text-2xl font-bold text-center mb-6 ">
             Manage Departments
           </h1>
 
@@ -93,25 +93,25 @@ function Department() {
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
               placeholder="Search departments..."
-              className="w-full p-3 bg-black border border-gray-300 rounded-lg focus:outline-none focus:ring focus:ring-blue-300"
+              className="w-full p-3  border border-gray-300 rounded-lg focus:outline-none focus:ring focus:ring-blue-300"
             />
           </div>
 
           <form
-            className="mb-8 bg-zinc-900 p-6 rounded-lg shadow-md"
+            className="mb-8  p-6 rounded-lg shadow-md"
             onSubmit={handleSubmit(handleDepartment)}
           >
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               {/* Department Name */}
               <div>
-                <label className="block text-gray-700 mb-2">
+                <label className="block  mb-2">
                   Department Name
                 </label>
                 <input
                   type="text"
                   {...register("departmentname")}
                   placeholder="Enter Department Name"
-                  className={`w-full p-3 border bg-black rounded-lg focus:outline-none focus:ring focus:ring-blue-300 ${
+                  className={`w-full p-3 border  rounded-lg focus:outline-none focus:ring focus:ring-blue-300 ${
                     errors.departmentname ? "border-red-500" : "border-gray-300"
                   }`}
                 />
@@ -124,12 +124,12 @@ function Department() {
 
               {/* Description */}
               <div>
-                <label className="block text-gray-700 mb-2">Description</label>
+                <label className="block  mb-2">Description</label>
                 <input
                   type="text"
                   {...register("departmentDes")}
                   placeholder="Enter Department Description"
-                  className={`w-full p-3 border bg-black rounded-lg focus:outline-none focus:ring focus:ring-blue-300 ${
+                  className={`w-full p-3 border  rounded-lg focus:outline-none focus:ring focus:ring-blue-300 ${
                     errors.departmentDes ? "border-red-500" : "border-gray-300"
                   }`}
                 />
@@ -142,12 +142,12 @@ function Department() {
 
               {/* Manager */}
               <div>
-                <label className="block text-gray-700 mb-2">Manager</label>
+                <label className="block  mb-2">Manager</label>
                 <input
                   type="text"
                   {...register("manager")}
                   placeholder="Enter Manager Name"
-                  className={`w-full p-3 border  bg-black rounded-lg focus:outline-none focus:ring focus:ring-blue-300 ${
+                  className={`w-full p-3 border   rounded-lg focus:outline-none focus:ring focus:ring-blue-300 ${
                     errors.manager ? "border-red-500" : "border-gray-300"
                   }`}
                 />
@@ -160,14 +160,14 @@ function Department() {
 
               {/* Employee Number */}
               <div>
-                <label className="block text-gray-700 mb-2">
+                <label className="block  mb-2">
                   Employee Number
                 </label>
                 <input
                   type="text"
                   {...register("employeeNumber")}
                   placeholder="Enter Employee Number"
-                  className={`w-full p-3 border bg-black rounded-lg focus:outline-none focus:ring focus:ring-blue-300 ${
+                  className={`w-full p-3 border  rounded-lg focus:outline-none focus:ring focus:ring-blue-300 ${
                     errors.employeeNumber ? "border-red-500" : "border-gray-300"
                   }`}
                 />

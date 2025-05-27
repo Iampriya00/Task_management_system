@@ -88,7 +88,7 @@ function AddNewTask() {
                 Project Name:
               </label>
               <select
-                className="w-full p-2 border border-gray-300 rounded-md bg-slate-900"
+                className="w-full p-2 border border-gray-300 rounded-md "
                 {...register("project")}
               >
                 <option value="">Select a Project</option>

@@ -17,7 +17,7 @@ function ViewEmp() {
         <SideBar />
         <div className="w-3/4 flex-1 p-6 max-md:w-full">
           <div className="max-w-6xl mx-auto shadow-lg rounded-lg p-6">
-            <h1 className="text-3xl font-semibold text-center mb-6 text-gray-400">
+            <h1 className="text-3xl font-semibold text-center mb-6">
               Employee Information
             </h1>
             <div className="flex items-center justify-between p-6">
@@ -29,10 +29,10 @@ function ViewEmp() {
                   </AvatarFallback>
                 </Avatar>
                 <div className="ml-4">
-                  <h2 className="text-xl font-semibold text-gray-400">
+                  <h2 className="text-xl font-semibold">
                     {employee?.username}
                   </h2>
-                  <p className="text-gray-400">{employee?.jobtitle}</p>
+                  <p>{employee?.jobtitle}</p>
                 </div>
               </div>
               <div className="text-slate-50">
@@ -44,27 +44,27 @@ function ViewEmp() {
             <div className="flex border-y border-gray-300 justify-between">
               <div className="p-4">
                 <div className="mb-3">
-                  <h3 className="text-gray-400 font-medium">Email</h3>
-                  <p className="text-gray-300">{employee?.email}</p>
+                  <h3 className="font-medium">Email</h3>
+                  <p className="">{employee?.email}</p>
                 </div>
                 <div className="mb-3">
-                  <h3 className="text-gray-400 font-medium">Phone</h3>
-                  <p className="text-gray-300">{employee?.phone}</p>
+                  <h3 className="font-medium">Phone</h3>
+                  <p className="">{employee?.phone}</p>
                 </div>
                 <div className="mb-3">
-                  <h3 className="text-gray-400 font-medium">Salary</h3>
-                  <p className="text-gray-300">{employee?.salary}</p>
+                  <h3 className="font-medium">Salary</h3>
+                  <p className="">{employee?.salary}</p>
                 </div>
                 <div>
-                  <h3 className="text-gray-400 font-medium">Role</h3>
-                  <p className="text-gray-300">{employee?.role}</p>
+                  <h3 className="font-medium">Role</h3>
+                  <p className="">{employee?.role}</p>
                 </div>
               </div>
               <div className="border-gray-300 p-4">
-                <p className="text-gray-400 text-sm">
+                <p className=" text-sm">
                   Created at: {new Date(employee?.createdAt).toLocaleString()}
                 </p>
-                <p className="text-gray-400 text-sm">
+                <p className="text-sm">
                   Updated at: {new Date(employee?.updatedAt).toLocaleString()}
                 </p>
               </div>
@@ -89,7 +89,7 @@ function ViewEmp() {
                 <tbody>
                   {task?.tasks && task.tasks.length > 0 ? (
                     task.tasks.map((task, idx) => (
-                      <tr key={idx} className="hover:bg-gray-50 text-slate-500">
+                      <tr key={idx}>
                         <td className="px-4 py-2 border-b">
                           {task.taskdetails}
                         </td>

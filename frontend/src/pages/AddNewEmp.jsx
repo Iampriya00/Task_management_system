@@ -71,18 +71,18 @@ function AddNewEmp() {
   return (
     <div className="flex min-h-screen bg-gray-100">
       <SideBar />
-      <div className="w-3/4 flex-1 p-6 md:p-10 bg-black max-md:w-full">
+      <div className="w-3/4 flex-1 p-6 md:p-10 max-md:w-full">
         <div className="max-w-lg mx-auto p-4">
           <h1 className="text-2xl font-semibold mb-4">Add New Employee</h1>
           <form className="space-y-4" onSubmit={handleSubmit(handleAddEmp)}>
             <div>
-              <label className="block text-sm font-medium text-gray-400">
+              <label className="block text-sm font-medium">
                 Employee Image:
               </label>
               <input
                 type="text"
                 {...register("profileImg")}
-                className="w-full p-2 border text-slate-600 border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                className="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
               />
               {errors.profileImg && (
                 <p className="text-red-500 text-xs mt-1">
@@ -91,7 +91,7 @@ function AddNewEmp() {
               )}
             </div>
             <div>
-              <label className="block text-sm font-medium text-gray-400">
+              <label className="block text-sm font-medium">
                 Employee Name:
               </label>
               <input
@@ -106,7 +106,7 @@ function AddNewEmp() {
               )}
             </div>
             <div>
-              <label className="block text-sm font-medium text-gray-400">
+              <label className="block text-sm font-medium ">
                 Email:
               </label>
               <input
@@ -121,7 +121,7 @@ function AddNewEmp() {
               )}
             </div>
             <div>
-              <label className="block text-sm font-medium text-gray-400">
+              <label className="block text-sm font-medium">
                 Phone:
               </label>
               <input
@@ -136,7 +136,7 @@ function AddNewEmp() {
               )}
             </div>
             <div>
-              <label className="block text-sm font-medium text-gray-400">
+              <label className="block text-sm font-medium">
                 Job Title:
               </label>
               <select
@@ -157,7 +157,7 @@ function AddNewEmp() {
               )}
             </div>
             <div>
-              <label className="block text-sm font-medium text-gray-400">
+              <label className="block text-sm font-medium">
                 Salary:
               </label>
               <input
@@ -176,7 +176,7 @@ function AddNewEmp() {
               )}
             </div>
             <div>
-              <label className="block text-sm font-medium text-gray-400">
+              <label className="block text-sm font-medium">
                 Password:
               </label>
               <div className="relative">

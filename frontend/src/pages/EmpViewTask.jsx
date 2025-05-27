@@ -48,7 +48,7 @@ function EmpViewTask() {
           Task Details
         </h1>
 
-        <div className="overflow-auto h-[700px]">
+        <div className="overflow-auto">
           <table className="min-w-full table-auto border-collapse border">
             <thead className=" text-slate-400">
               <tr>
@@ -101,7 +101,7 @@ function EmpViewTask() {
                 task.tasks.map((taskItem) => (
                   <tr
                     key={taskItem._id}
-                    className="hover:bg-gray-700 text-[#0EA5E9]"
+                    className=" text-[#0EA5E9]"
                   >
                     <td className="px-4 py-2 border-b">
                       {taskItem.taskdetails || "N/A"}

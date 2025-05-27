@@ -37,12 +37,12 @@ function AllEmployee() {
       <SideBar />
       <div className="w-3/4 flex justify-center h-screen max-md:w-full">
         <div className="container mx-auto p-8">
-          <h1 className="text-3xl font-bold text-center mb-8 text-gray-400">
+          <h1 className="text-3xl font-bold text-center mb-8">
             Employee List
           </h1>
           <div className="flex justify-end mb-4">
             <Link to="/addemployee">
-              <Button className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-md">
+              <Button className="bg-blue-600 text-white px-4 py-2 rounded-md">
                 Create New Employee
               </Button>
             </Link>
@@ -77,10 +77,10 @@ function AllEmployee() {
                   empData.data.map((item, idx) => (
                     <tr
                       key={idx}
-                      className={`cursor-pointer hover:bg-gray-700`}
+                      className={`cursor-pointer`}
                       onClick={() => navigate(`/viewemplyoee/${item._id}`)}
                     >
-                      <td className="px-6 text-gray-400 py-4 border-b border-gray-300">
+                      <td className="px-6 py-4 border-b border-gray-300">
                         {item._id}
                       </td>
                       <td className="px-6 py-4 border-b border-gray-300">
@@ -90,19 +90,19 @@ function AllEmployee() {
                           className="w-10 h-10 rounded-full"
                         />
                       </td>
-                      <td className="px-6 py-4 text-gray-400 border-b border-gray-300">
+                      <td className="px-6 py-4 border-b border-gray-300">
                         {item.username}
                       </td>
-                      <td className="px-6 py-4 text-gray-400 border-b border-gray-300">
+                      <td className="px-6 py-4 border-b border-gray-300">
                         {item.email}
                       </td>
-                      <td className="px-6 py-4 text-gray-400 border-b border-gray-300">
+                      <td className="px-6 py-4 border-b border-gray-300">
                         {item.phone}
                       </td>
-                      <td className="px-6 py-4 text-gray-400 border-b border-gray-300">
+                      <td className="px-6 py-4 border-b border-gray-300">
                         {item.jobtitle}
                       </td>
-                      <td className="px-6 py-4 text-gray-400 border-b border-gray-300">
+                      <td className="px-6 py-4 border-b border-gray-300">
                         {item.salary}
                       </td>
                       <td className="px-6 py-4 border-b border-gray-300">

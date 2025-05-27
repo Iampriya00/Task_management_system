@@ -38,7 +38,7 @@ function Leaves() {
   if (isLoading) {
     return (
       <div className="flex justify-center items-center h-screen">
-        <p className="text-gray-600 text-lg">Loading...</p>
+        <p className=" text-lg">Loading...</p>
       </div>
     );
   }
@@ -57,7 +57,7 @@ function Leaves() {
       <SideBar />
       <div className="w-3/4 max-md:w-full flex-1 p-20 md:p-10">
         <div className="max-w-lg mx-auto">
-          <h1 className="text-2xl text-center font-semibold mb-4 text-gray-700">
+          <h1 className="text-2xl text-center font-semibold mb-4 ">
             View All Leaves
           </h1>
         </div>
@@ -77,7 +77,7 @@ function Leaves() {
                 ].map((header) => (
                   <th
                     key={header}
-                    className="text-left text-gray-700 px-6 py-4 border-b border-gray-300 text-sm sm:text-base"
+                    className="text-left  px-6 py-4 border-b border-gray-300 text-sm sm:text-base"
                   >
                     {header}
                   </th>
@@ -89,30 +89,30 @@ function Leaves() {
                 empData.map((item, idx) => (
                   <tr
                     key={item._id}
-                    className={`cursor-pointer hover:bg-gray-100 transition-all duration-300`}
+                    className={`cursor-pointer transition-all duration-300`}
                   >
-                    <td className="px-6 py-4 text-gray-600 border-b border-gray-300 text-xs sm:text-sm">
+                    <td className="px-6 py-4  border-b border-gray-300 text-xs sm:text-sm">
                       {item.userId?.username || "N/A"}
                     </td>
-                    <td className="px-6 py-4 text-gray-600 border-b border-gray-300 text-xs sm:text-sm">
+                    <td className="px-6 py-4  border-b border-gray-300 text-xs sm:text-sm">
                       {item.userId?.email || "N/A"}
                     </td>
-                    <td className="px-6 py-4 text-gray-600 border-b border-gray-300 text-xs sm:text-sm">
+                    <td className="px-6 py-4  border-b border-gray-300 text-xs sm:text-sm">
                       {item.userId?.jobtitle || "N/A"}
                     </td>
-                    <td className="px-6 py-4 text-gray-600 border-b border-gray-300 text-xs sm:text-sm">
+                    <td className="px-6 py-4  border-b border-gray-300 text-xs sm:text-sm">
                       {item.leavetype}
                     </td>
-                    <td className="px-6 py-4 text-gray-600 border-b border-gray-300 text-xs sm:text-sm">
+                    <td className="px-6 py-4  border-b border-gray-300 text-xs sm:text-sm">
                       {formatDate(item.startDate)}
                     </td>
-                    <td className="px-6 py-4 text-gray-600 border-b border-gray-300 text-xs sm:text-sm">
+                    <td className="px-6 py-4  border-b border-gray-300 text-xs sm:text-sm">
                       {formatDate(item.endDate)}
                     </td>
-                    <td className="px-6 py-4 text-gray-600 border-b border-gray-300 text-xs sm:text-sm">
+                    <td className="px-6 py-4  border-b border-gray-300 text-xs sm:text-sm">
                       {item.reason || "N/A"}
                     </td>
-                    <td className="px-6 py-4 text-gray-600 border-b border-gray-300">
+                    <td className="px-6 py-4  border-b border-gray-300">
                       <select
                         className="w-[115px] py-2 px-4 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400"
                         value={item.status}
@@ -129,7 +129,7 @@ function Leaves() {
                 <tr>
                   <td
                     colSpan="8"
-                    className="px-6 py-4 text-center text-gray-600"
+                    className="px-6 py-4 text-center "
                   >
                     No leaves found
                   </td>

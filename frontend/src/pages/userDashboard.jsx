@@ -27,11 +27,11 @@ function UserDashboard() {
   };
 
   return (
-    <div className="flex min-h-screen bg-gray-800">
+    <div className="flex min-h-screen">
       <SideBar />
       <div className="w-3/4 flex-1 p-6 md:p-10 max-md:w-full">
         <div className="max-w-4xl mx-auto p-6">
-          <h1 className="text-3xl font-semibold text-center mb-6 text-gray-800">
+          <h1 className="text-3xl font-semibold text-center mb-6">
             Your Information
           </h1>
           <div className="flex justify-center mb-4">
@@ -64,7 +64,7 @@ function UserDashboard() {
           </Button>
           <Button onClick={handleClockOut}>Clock Out</Button>
         </div>
-        <div className="mt-4 overflow-auto h-[452px]">
+        <div className="mt-4 overflow-auto h-[200px]">
           {/* Show loading indicator */}
           {attendenceLoading ? (
             <div>Loading attendance data...</div>
