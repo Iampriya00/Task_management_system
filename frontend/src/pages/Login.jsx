@@ -53,7 +53,7 @@ function Login() {
   }, [isLoggedIn, user, token, navigate]);
   return (
     <div
-      className="min-h-screen flex items-center justify-center bg-no-repeat bg-left"
+      className="min-h-screen flex items-center justify-center bg-no-repeat bg-left overflow-hidden"
       style={{ backgroundImage: "url('bg-img.png')" }}
     >
       <div className="container mx-auto px-4">
