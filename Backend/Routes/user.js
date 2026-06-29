@@ -68,51 +68,53 @@ router.post("/login", async (req, res) => {
   try {
     const { email, password } = req.body;
 
-    // Ensure email and password are provided
     if (!email || !password) {
       return res
         .status(400)
         .json({ message: "Email and password are required" });
     }
 
-    // Find the user by email
     const existEmail = await User.findOne({ email });
+
     if (!existEmail) {
       return res.status(400).json({ message: "Email does not exist" });
     }
 
-    // Check if the hashed password exists
-    if (!existEmail.password) {
-      return res.status(400).json({ message: "Invalid credentials" });
+    let validPassword = false;
+
+    // If password is a bcrypt hash
+    if (existEmail.password.startsWith("$2b$")) {
+      validPassword = await bcrypt.compare(password, existEmail.password);
+    } else {
+      // Plain text password (admin created manually)
+      validPassword = password === existEmail.password;
     }
 
-    // Compare the plaintext password with the hashed password
-    const validPassword = await bcrypt.compare(password, existEmail.password);
     if (!validPassword) {
       return res.status(400).json({ message: "Invalid password" });
     }
 
-    // Generate a JWT token
     const authClaim = {
       username: existEmail.username,
       id: existEmail._id,
     };
+
     const token = jwt.sign(authClaim, process.env.JWT_TOKEN, {
       expiresIn: "10d",
     });
 
-    // Return the response
     return res.status(200).json({
       message: "Login successful",
       user: {
         id: existEmail._id,
-        email: existEmail.email,
         username: existEmail.username,
+        email: existEmail.email,
         role: existEmail.role,
       },
-      token: token,
+      token,
     });
   } catch (error) {
+    console.error(error);
     return res.status(500).json({ message: "Internal Server Error" });
   }
 });
@@ -206,7 +208,7 @@ router.post("/updateinformation", authenticatetoken, async (req, res) => {
     const updateUser = await User.findByIdAndUpdate(
       id,
       { username, phone, profileImg, jobtitle, salary },
-      { new: true }
+      { new: true },
     ).select("-password");
 
     if (!updateUser) {
@@ -246,7 +248,7 @@ router.post(
       const updateUser = await User.findByIdAndUpdate(
         id,
         { username, phone, profileImg, jobtitle, salary },
-        { new: true }
+        { new: true },
       ).select("-password");
 
       if (!updateUser) {
@@ -263,7 +265,7 @@ router.post(
       console.error("Error updating user information:", error);
       return res.status(500).json({ message: "Internal Server Error" });
     }
-  }
+  },
 );
 // router.post("/forgot-password", async (req, res) => {
 //   const { email } = req.body;
