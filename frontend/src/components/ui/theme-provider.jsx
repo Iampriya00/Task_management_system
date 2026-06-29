@@ -15,7 +15,7 @@ export function ThemeProvider({
 }) {
   // State for managing the theme
   const [theme, setTheme] = useState(
-    () => localStorage.getItem(storageKey) || defaultTheme
+    () => localStorage.getItem(storageKey) || defaultTheme,
   );
 
   useEffect(() => {
