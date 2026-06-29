@@ -1,6 +1,6 @@
 import { useAppSelector } from "@/store/hooks";
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Button } from "../ui/button";
 import { handleLogout, userDetails } from "@/services/authservice";
 import { useQuery } from "react-query";
@@ -8,6 +8,7 @@ import { ModeToggle } from "../ui/themeToggle";
 import { FaBars } from "react-icons/fa";
 
 function SideBar() {
+  const navigate = useNavigate();
   const user = useAppSelector((state) => state.user.user);
   useQuery("userInfo", userDetails);
 
@@ -17,14 +18,18 @@ function SideBar() {
     setSidebarOpen(!isSidebarOpen);
   };
 
+  const onLogout = () => {
+    handleLogout();
+    navigate("/");
+  };
   return (
     <div className="relative min-md:w-1/4 ">
       {/* Hamburger Icon */}
       <div
-        className="absolute top-8 left-8 cursor-pointer z-50 max-md:block hidden"
+        className="absolute z-50 hidden cursor-pointer top-8 left-8 max-md:block"
         onClick={toggleSidebar}
       >
-        <FaBars className="text-slate-200 text-2xl" />
+        <FaBars className="text-2xl text-slate-200" />
       </div>
 
       {/* Sidebar */}
@@ -34,7 +39,7 @@ function SideBar() {
         } transition-transform duration-300 w-64 z-40 min-md:translate-x-0`}
       >
         {/* Sidebar Title */}
-        <h1 className="text-center text-white text-2xl font-bold py-6 border-b border-blue-500">
+        <h1 className="py-6 text-2xl font-bold text-center text-white border-b border-blue-500">
           Dashboard
         </h1>
 
@@ -43,18 +48,18 @@ function SideBar() {
           <img
             src={user.profileImg || "https://via.placeholder.com/150"}
             alt="User Picture"
-            className="w-24 h-24 md:w-32 md:h-32 rounded-full border-4 border-white shadow-md"
+            className="w-24 h-24 border-4 border-white rounded-full shadow-md md:w-32 md:h-32"
           />
-          <h2 className="text-white font-medium text-lg mt-4">
+          <h2 className="mt-4 text-lg font-medium text-white">
             {user.username || "User Name"}
           </h2>
-          <p className="text-blue-200 text-sm">
+          <p className="text-sm text-blue-200">
             {user.email || "user@example.com"}
           </p>
         </div>
 
         {/* Navigation Links */}
-        <div className="flex flex-col flex-grow justify-between mt-10">
+        <div className="flex flex-col justify-between flex-grow mt-10">
           <ul className="space-y-6 text-center">
             {/* User Role Links */}
             {user.role === "user" && (
@@ -62,7 +67,7 @@ function SideBar() {
                 <li>
                   <Link
                     to="/userDasboard"
-                    className="block text-white font-semibold hover:text-blue-200"
+                    className="block font-semibold text-white hover:text-blue-200"
                   >
                     Dashboard
                   </Link>
@@ -70,7 +75,7 @@ function SideBar() {
                 <li>
                   <Link
                     to="/empviewtask"
-                    className="block text-white font-semibold hover:text-blue-200"
+                    className="block font-semibold text-white hover:text-blue-200"
                   >
                     View Task
                   </Link>
@@ -78,7 +83,7 @@ function SideBar() {
                 <li>
                   <Link
                     to="/leaveManagement"
-                    className="block text-white font-semibold hover:text-blue-200"
+                    className="block font-semibold text-white hover:text-blue-200"
                   >
                     Leave Request
                   </Link>
@@ -92,7 +97,7 @@ function SideBar() {
                 <li>
                   <Link
                     to="/admin"
-                    className="block text-white font-semibold hover:text-blue-200"
+                    className="block font-semibold text-white hover:text-blue-200"
                   >
                     Dashboard
                   </Link>
@@ -100,7 +105,7 @@ function SideBar() {
                 <li>
                   <Link
                     to="/employee"
-                    className="block text-white font-semibold hover:text-blue-200"
+                    className="block font-semibold text-white hover:text-blue-200"
                   >
                     Employees
                   </Link>
@@ -108,7 +113,7 @@ function SideBar() {
                 <li>
                   <Link
                     to="/departments"
-                    className="block text-white font-semibold hover:text-blue-200"
+                    className="block font-semibold text-white hover:text-blue-200"
                   >
                     Departments
                   </Link>
@@ -116,7 +121,7 @@ function SideBar() {
                 <li>
                   <Link
                     to="/leaves"
-                    className="block text-white font-semibold hover:text-blue-200"
+                    className="block font-semibold text-white hover:text-blue-200"
                   >
                     Leaves
                   </Link>
@@ -124,7 +129,7 @@ function SideBar() {
                 <li>
                   <Link
                     to="/addnewtask"
-                    className="block text-white font-semibold hover:text-blue-200"
+                    className="block font-semibold text-white hover:text-blue-200"
                   >
                     Add New Task
                   </Link>
@@ -132,7 +137,7 @@ function SideBar() {
                 <li>
                   <Link
                     to="/addNewProject"
-                    className="block text-white font-semibold hover:text-blue-200"
+                    className="block font-semibold text-white hover:text-blue-200"
                   >
                     Add New Project
                   </Link>
@@ -143,7 +148,7 @@ function SideBar() {
             <li>
               <Link
                 to="/settings"
-                className="block text-white font-semibold hover:text-blue-200"
+                className="block font-semibold text-white hover:text-blue-200"
               >
                 Account Settings
               </Link>
@@ -151,12 +156,12 @@ function SideBar() {
           </ul>
 
           {/* Logout Button */}
-          <div className="flex flex-col my-6 justify-center items-center space-y-3">
+          <div className="flex flex-col items-center justify-center my-6 space-y-3">
             <ModeToggle />
             <Button
               variant="destructive"
-              className="bg-red-600 hover:bg-red-500 text-white px-6 py-2 rounded-md shadow-md"
-              onClick={handleLogout}
+              className="px-6 py-2 text-white bg-red-600 rounded-md shadow-md hover:bg-red-500"
+              onClick={onLogout}
             >
               Log Out
             </Button>
@@ -167,7 +172,7 @@ function SideBar() {
       {/* Overlay for closing sidebar */}
       {isSidebarOpen && (
         <div
-          className="fixed inset-0 bg-black bg-opacity-50 z-30"
+          className="fixed inset-0 z-30 bg-black bg-opacity-50"
           onClick={toggleSidebar}
         ></div>
       )}
