@@ -9,9 +9,9 @@ function AdminDashboard() {
   return (
     <div className="flex ">
       <SideBar />
-      <div className="min-md:w-3/4 flex h-screen max-md:w-full">
-        <div className="p-20 w-full ">
-          <h1 className="text-2xl mb-6 text-center font-semibold">
+      <div className="flex h-screen min-md:w-3/4 max-md:w-full">
+        <div className="w-full p-20 ">
+          <h1 className="mb-6 text-2xl font-semibold text-center">
             Use Your Information
           </h1>
           <div className="flex justify-center mb-3">
@@ -35,7 +35,6 @@ function AdminDashboard() {
             </p>
           </div>
         </div>
-        <div></div>
       </div>
     </div>
   );
