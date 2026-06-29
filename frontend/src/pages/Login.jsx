@@ -52,65 +52,70 @@ function Login() {
     }
   }, [isLoggedIn, user, token, navigate]);
   return (
-    <div
-      className="min-h-screen flex items-center justify-center bg-no-repeat bg-left overflow-hidden"
-      style={{ backgroundImage: "url('bg-img.png')" }}
-    >
-      <div className="container mx-auto px-4">
-        <div className="flex justify-end">
+    <div className="flex flex-col items-center justify-center w-full min-h-screen p-4 bg-gradient-to-tr from-purple-200 via-blue-100 to-blue-300">
+      <form
+        onSubmit={handleSubmit}
+        className="relative flex flex-col w-full max-w-sm px-8 pt-6 overflow-hidden border shadow-xl bg-white/70 backdrop-blur-md pb-36 rounded-2xl border-white/40"
+        style={{
+          backgroundImage: "url('/formimg.jpg')",
+          backgroundSize: "contain",
+          backgroundRepeat: "no-repeat",
+          backgroundPosition: "bottom center",
+        }}
+      >
+        <div className="flex justify-end mb-2">
           <ModeToggle />
         </div>
+        <h2 className="text-2xl font-bold text-[#1d82e6] text-center mb-6">
+          Log In
+        </h2>
         <div>
-          <h1 className="text-3xl font-bold text-center mb-6">Log In</h1>
+          {/* Email Field */}
+          <label
+            className="block mb-1 text-sm font-medium text-gray-600"
+            htmlFor="email"
+          >
+            Email
+          </label>
+          <Input
+            type="email"
+            id="email"
+            name="email"
+            placeholder="Enter your email"
+            aria-label="Email"
+            onChange={handleChange}
+            value={values.email}
+            className="pl-6"
+          />
         </div>
-        <form
-          onSubmit={handleSubmit}
-          className="max-w-md mx-auto p-8 bg-secondary rounded-lg shadow-md space-y-3"
-        >
-          <div>
-            {/* Email Field */}
-            <label
-              className="block text-foreground text-sm font-bold mb-2"
-              htmlFor="email"
-            >
-              Email
-            </label>
-            <Input
-              type="email"
-              id="email"
-              name="email"
-              placeholder="Enter your email"
-              aria-label="Email"
-              onChange={handleChange}
-              value={values.email}
-            />
-          </div>
-          <div>
-            {/* Password Field */}
-            <label
-              className="block text-foreground text-sm font-bold mb-2"
-              htmlFor="password"
-            >
-              Password
-            </label>
-            <PasswordField
-              id="password"
-              name="password"
-              placeholder="Enter your password"
-              aria-label="Password"
-              onChange={handleChange}
-              value={values.password}
-            />
-          </div>
+        <div>
+          {/* Password Field */}
+          <label
+            className="block mb-1 text-sm font-medium text-gray-600"
+            htmlFor="password"
+          >
+            Password
+          </label>
+          <PasswordField
+            id="password"
+            name="password"
+            placeholder="Enter your password"
+            aria-label="Password"
+            onChange={handleChange}
+            value={values.password}
+            className="pl-6 pr-10"
+          />
+        </div>
 
-          <div>
-            {/* Submit Button */}
-            <Button type="submit" className="w-full">
-              Log In
-            </Button>
-          </div>
-        </form>
-      </div>
+        <div className="mt-6 ">
+          <Button
+            type="submit"
+            className="w-full bg-[#1d82e6] hover:bg-[#156bbf] text-white rounded-lg font-medium transition-colors shadow-md"
+          >
+            Log In
+          </Button>
+        </div>
+      </form>
     </div>
   );
 }
