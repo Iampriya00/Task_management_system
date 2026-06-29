@@ -55,7 +55,7 @@ function Login() {
     <div className="min-h-screen w-full bg-gradient-to-tr from-purple-200 via-blue-100 to-blue-300 p-4 flex flex-col items-center justify-center">
       {/* The Login Card Wrapper */}
       <form
-        className="w-full max-w-sm bg-white/70 backdrop-blur-md px-8 pt-6 pb-36 rounded-2xl border border-white/40 shadow-xl flex flex-col relative overflow-hidden"
+        className="w-full max-w-sm bg-white/70 backdrop-blur-md px-8 pt-6 pb-36 rounded-2xl border border-steelblue/50 shadow-xxl flex flex-col relative overflow-hidden"
         onSubmit={handleSubmit}
         style={{
           backgroundImage: "url('/formimg.jpg')",
