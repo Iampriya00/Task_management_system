@@ -47,7 +47,7 @@ export const empDetails = async (id) => {
   } catch (error) {
     console.error(
       "Error fetching employee details:",
-      error.response || error.message,
+      error.response || error.message
     );
   }
 };
@@ -170,7 +170,7 @@ export const viewLeave = async (id) => {
   } catch (error) {
     console.error(
       "Error fetching leave records:",
-      error.response?.data || error.message,
+      error.response?.data || error.message
     );
     throw error;
   }
@@ -216,7 +216,7 @@ export const viewSinProject = async (id) => {
   } catch (error) {
     console.error(
       "Failed to fetch project data:",
-      error.response?.data || error.message,
+      error.response?.data || error.message
     );
     throw error;
   }
@@ -282,7 +282,7 @@ export const viewDept = async (id) => {
   } catch (error) {
     console.error(
       "Failed to fetch project data:",
-      error.response?.data || error.message,
+      error.response?.data || error.message
     );
     throw error;
   }
