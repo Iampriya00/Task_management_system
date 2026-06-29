@@ -63,49 +63,53 @@ function Login() {
         <div>
           <h1 className="text-3xl font-bold text-center mb-6">Log In</h1>
         </div>
-        <div>
-          <form
-            className="p-24 bg-white/80 backdrop-blur-sm"
-            onSubmit={handleSubmit}
-            style={{ backgroundImage: "url('formimg.jpg')" }}
-          >
-            {/* Email */}
-            <div className="mb-4">
-              <label htmlFor="email" className="block text-sm font-bold mb-2">
-                Email
-              </label>
-              <Input
-                type="email"
-                id="email"
-                name="email"
-                placeholder="Enter your email"
-                value={values.email}
-                onChange={handleChange}
-              />
-            </div>
+        <form
+          onSubmit={handleSubmit}
+          className="max-w-md mx-auto p-8 bg-secondary rounded-lg shadow-md space-y-3"
+        >
+          <div>
+            {/* Email Field */}
+            <label
+              className="block text-foreground text-sm font-bold mb-2"
+              htmlFor="email"
+            >
+              Email
+            </label>
+            <Input
+              type="email"
+              id="email"
+              name="email"
+              placeholder="Enter your email"
+              aria-label="Email"
+              onChange={handleChange}
+              value={values.email}
+            />
+          </div>
+          <div>
+            {/* Password Field */}
+            <label
+              className="block text-foreground text-sm font-bold mb-2"
+              htmlFor="password"
+            >
+              Password
+            </label>
+            <PasswordField
+              id="password"
+              name="password"
+              placeholder="Enter your password"
+              aria-label="Password"
+              onChange={handleChange}
+              value={values.password}
+            />
+          </div>
 
-            {/* Password */}
-            <div className="mb-6">
-              <label
-                htmlFor="password"
-                className="block text-sm font-bold mb-2"
-              >
-                Password
-              </label>
-              <PasswordField
-                id="password"
-                name="password"
-                placeholder="Enter your password"
-                value={values.password}
-                onChange={handleChange}
-              />
-            </div>
-
+          <div>
+            {/* Submit Button */}
             <Button type="submit" className="w-full">
               Log In
             </Button>
-          </form>
-        </div>
+          </div>
+        </form>
       </div>
     </div>
   );
